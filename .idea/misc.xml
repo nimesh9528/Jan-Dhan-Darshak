@@ -10,8 +10,8 @@
         <entry key="app/src/main/res/drawable/icon_bank_mitra.xml" value="0.1235" />
         <entry key="app/src/main/res/drawable/icon_branch.xml" value="0.1235" />
         <entry key="app/src/main/res/drawable/icon_csc.xml" value="0.1235" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/navigation_drawer.xml" value="0.1961950059453032" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.193359375" />
+        <entry key="app/src/main/res/layout/navigation_drawer.xml" value="0.19111969111969113" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.2578125" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.163" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.163" />
