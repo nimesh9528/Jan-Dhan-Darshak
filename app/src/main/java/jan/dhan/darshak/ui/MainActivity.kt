@@ -1,8 +1,8 @@
-package jan.dhan.darshak
+package jan.dhan.darshak.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import jan.dhan.darshak.databinding.ActivityMainBinding
 import jan.dhan.darshak.viewmodels.MainActivityViewModel

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Jan Dhan Darshak</string>
+    <string name="atm">ATM</string>
+    <string name="branch">Branch</string>
+    <string name="post_office">Post Office</string>
+    <string name="csc">CSC</string>
+    <string name="bank_mitra">Bank Mitra</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
