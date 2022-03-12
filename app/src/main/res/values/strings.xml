@@ -19,4 +19,5 @@
     <string name="relevance">Relevance</string>
     <string name="open_now">Open Now</string>
     <string name="top_rated">Top Rated</string>
+    <string name="icon_no_data">No Data Icon</string>
 </resources>

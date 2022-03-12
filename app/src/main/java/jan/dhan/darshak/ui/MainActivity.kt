@@ -1,21 +1,30 @@
 package jan.dhan.darshak.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bhardwaj.navigation.SlideGravity
+import com.bhardwaj.navigation.SlidingRootNav
 import com.bhardwaj.navigation.SlidingRootNavBuilder
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.card.MaterialCardView
 import jan.dhan.darshak.R
 import jan.dhan.darshak.databinding.ActivityMainBinding
 import jan.dhan.darshak.viewmodels.MainActivityViewModel
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainActivityViewModel by viewModels()
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
+    private lateinit var slidingRootNavBuilder: SlidingRootNav
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +41,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun clickListeners() {
-        val slidingRootNavBuilder = SlidingRootNavBuilder(this)
-            .withMenuOpened(false)
-            .withGravity(SlideGravity.RIGHT)
-            .withMenuLayout(R.layout.navigation_drawer)
-            .inject()
-
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.main -> {
@@ -139,8 +142,69 @@ class MainActivity : AppCompatActivity() {
                     textView.setTextColor(resources.getColor(R.color.black, theme))
             }
         }
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {}
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                binding.mcvDirectionContainer
+                    .animate()
+                    .scaleX(1 - slideOffset)
+                    .scaleY(1 - slideOffset)
+                    .alpha(1 - slideOffset * 2)
+                    .setDuration(0)
+                    .start()
+
+                binding.mcvCurrentContainer
+                    .animate()
+                    .scaleX(1 - slideOffset)
+                    .scaleY(1 - slideOffset)
+                    .alpha(1 - slideOffset * 2)
+                    .setDuration(0)
+                    .start()
+
+                if (binding.mcvDirectionContainer.alpha <= 0) {
+                    binding.mcvDirectionContainer.isClickable = false
+                    binding.mcvDirectionContainer.isFocusable = false
+
+                    binding.mcvCurrentContainer.isClickable = false
+                    binding.mcvCurrentContainer.isFocusable = false
+                } else {
+                    binding.mcvDirectionContainer.isClickable = true
+                    binding.mcvDirectionContainer.isFocusable = true
+
+                    binding.mcvCurrentContainer.isClickable = true
+                    binding.mcvCurrentContainer.isFocusable = true
+                }
+            }
+        })
+
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                when {
+                    s.isNullOrEmpty() -> {
+                        binding.ivSearchIcon.visibility = View.VISIBLE
+                        binding.ivCloseIcon.visibility = View.GONE
+                    }
+                    else -> {
+                        binding.ivSearchIcon.visibility = View.GONE
+                        binding.ivCloseIcon.visibility = View.VISIBLE
+                    }
+                }
+            }
+        })
+        binding.ivCloseIcon.setOnClickListener {
+            binding.etSearch.setText("")
+        }
     }
 
     private fun initialise() {
+        slidingRootNavBuilder = SlidingRootNavBuilder(this)
+            .withMenuOpened(false)
+            .withGravity(SlideGravity.RIGHT)
+            .withMenuLayout(R.layout.navigation_drawer)
+            .inject()
+
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.mcvBottomSheetContainer)
     }
 }
