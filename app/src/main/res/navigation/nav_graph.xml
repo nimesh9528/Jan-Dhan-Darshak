@@ -3,30 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/ATMFragment">
+    app:startDestination="@id/main">
     <fragment
-        android:id="@+id/ATMFragment"
-        android:name="jan.dhan.darshak.fragments.ATMFragment"
-        android:label="fragment_atm"
-        tools:layout="@layout/fragment_atm" />
-    <fragment
-        android:id="@+id/BankMitraFragment"
-        android:name="jan.dhan.darshak.fragments.BankMitraFragment"
-        android:label="fragment_bank_mitra"
-        tools:layout="@layout/fragment_bank_mitra" />
-    <fragment
-        android:id="@+id/BranchFragment"
-        android:name="jan.dhan.darshak.fragments.BranchFragment"
-        android:label="fragment_branch"
-        tools:layout="@layout/fragment_branch" />
-    <fragment
-        android:id="@+id/PostOfficeFragment"
-        android:name="jan.dhan.darshak.fragments.PostOfficeFragment"
-        android:label="fragment_post_office"
-        tools:layout="@layout/fragment_post_office" />
-    <fragment
-        android:id="@+id/CSCFragment"
-        android:name="jan.dhan.darshak.fragments.CSCFragment"
-        android:label="fragment_csc"
-        tools:layout="@layout/fragment_csc" />
+        android:id="@+id/main"
+        android:name="jan.dhan.darshak.fragments.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
 </navigation>

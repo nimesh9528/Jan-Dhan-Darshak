@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ATMFragment">
+    tools:context=".fragments.MainFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcvSearchView"
@@ -111,53 +111,95 @@
         tools:itemCount="4"
         tools:listitem="@layout/single_filter" />
 
-    <ImageView
-        android:id="@+id/ivLayerIcon"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvLayerContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="32dp"
-        android:contentDescription="@string/icon_layer_fab"
-        android:src="@drawable/icon_layer_fab"
-        app:layout_constraintEnd_toEndOf="@id/ivDirectionIcon"
-        app:layout_constraintStart_toStartOf="@id/ivDirectionIcon"
-        app:layout_constraintTop_toBottomOf="@id/rvFilter" />
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="@id/mcvDirectionContainer"
+        app:layout_constraintStart_toStartOf="@id/mcvDirectionContainer"
+        app:layout_constraintTop_toBottomOf="@id/rvFilter">
 
-    <ImageView
-        android:id="@+id/ivNorthIcon"
+        <ImageView
+            android:id="@+id/ivLayerIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/icon_layer_fab"
+            android:src="@drawable/icon_layer_fab" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="16dp"
-        android:contentDescription="@string/icon_north_fab"
-        android:foregroundGravity="center"
-        android:src="@drawable/icon_north_facing_fab"
-        app:layout_constraintEnd_toEndOf="@id/ivDirectionIcon"
-        app:layout_constraintStart_toStartOf="@id/ivDirectionIcon"
-        app:layout_constraintTop_toBottomOf="@id/ivLayerIcon" />
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="@id/mcvDirectionContainer"
+        app:layout_constraintStart_toStartOf="@id/mcvDirectionContainer"
+        app:layout_constraintTop_toBottomOf="@id/mcvLayerContainer">
 
-    <ImageView
-        android:id="@+id/ivCurrentIcon"
+        <ImageView
+            android:id="@+id/ivNorthIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/icon_north_fab"
+            android:src="@drawable/icon_north_facing_fab" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="@string/icon_current_fab"
-        android:src="@drawable/icon_location_fab"
-        app:layout_constraintBottom_toTopOf="@id/ivDirectionIcon"
-        app:layout_constraintEnd_toEndOf="@id/ivDirectionIcon"
-        app:layout_constraintStart_toStartOf="@id/ivDirectionIcon" />
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toTopOf="@id/mcvDirectionContainer"
+        app:layout_constraintEnd_toEndOf="@id/mcvDirectionContainer"
+        app:layout_constraintStart_toStartOf="@id/mcvDirectionContainer">
 
-    <ImageView
-        android:id="@+id/ivDirectionIcon"
+        <ImageView
+            android:id="@+id/ivCurrentIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/icon_current_fab"
+            android:src="@drawable/icon_current_location_fab" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvDirectionContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="@string/icon_direction_fab"
-        android:src="@drawable/icon_direction_fab"
+        android:elevation="10dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/ivDirectionIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/icon_direction_fab"
+            android:src="@drawable/icon_direction_fab" />
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import jan.dhan.darshak.R
 import jan.dhan.darshak.adapters.FilterAdapter
-import jan.dhan.darshak.databinding.FragmentAtmBinding
+import jan.dhan.darshak.databinding.FragmentMainBinding
 
-class ATMFragment : Fragment() {
-    private var _binding: FragmentAtmBinding? = null
+class MainFragment : Fragment() {
+    private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var filterAdapter: FilterAdapter
@@ -22,7 +22,7 @@ class ATMFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAtmBinding.inflate(inflater, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
