@@ -13,7 +13,7 @@ class MainActivityViewModel: ViewModel() {
 
     init {
         viewModelScope.launch {
-            delay(1000)
+            delay(100)
             _isLoading.value = false
         }
     }

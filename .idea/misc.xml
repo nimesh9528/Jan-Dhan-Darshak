@@ -9,14 +9,25 @@
         <entry key="app/src/main/res/drawable/icon_atm.xml" value="0.1235" />
         <entry key="app/src/main/res/drawable/icon_bank_mitra.xml" value="0.1235" />
         <entry key="app/src/main/res/drawable/icon_branch.xml" value="0.1235" />
+        <entry key="app/src/main/res/drawable/icon_cancel.xml" value="0.168" />
         <entry key="app/src/main/res/drawable/icon_csc.xml" value="0.1235" />
+        <entry key="app/src/main/res/drawable/icon_current_location_fab.xml" value="0.1465" />
+        <entry key="app/src/main/res/drawable/icon_direction_fab.xml" value="0.168" />
+        <entry key="app/src/main/res/drawable/icon_layer_fab.xml" value="0.1465" />
+        <entry key="app/src/main/res/drawable/icon_location_fab.xml" value="0.1465" />
+        <entry key="app/src/main/res/drawable/icon_north_fab.xml" value="0.168" />
+        <entry key="app/src/main/res/drawable/icon_north_facing_fab.xml" value="0.1465" />
+        <entry key="app/src/main/res/drawable/shadow.xml" value="0.141" />
+        <entry key="app/src/main/res/drawable/splash_logo.xml" value="0.168" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.193359375" />
-        <entry key="app/src/main/res/layout/fragment_atm.xml" value="0.193359375" />
+        <entry key="app/src/main/res/layout/fragment_atm.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_bank_mitra.xml" value="0.193359375" />
         <entry key="app/src/main/res/layout/fragment_branch.xml" value="0.193359375" />
         <entry key="app/src/main/res/layout/fragment_csc.xml" value="0.193359375" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.8342857142857143" />
         <entry key="app/src/main/res/layout/fragment_post_office.xml" value="0.193359375" />
         <entry key="app/src/main/res/layout/navigation_drawer.xml" value="0.19111969111969113" />
+        <entry key="app/src/main/res/layout/single_filter.xml" value="0.193359375" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.2578125" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.193359375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.163" />

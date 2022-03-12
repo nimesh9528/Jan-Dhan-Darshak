@@ -8,4 +8,13 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="jan_dhan_darshan">Jan Dhan\nDarshan</string>
+    <string name="icon_search">Search Icon</string>
+    <string name="search_here">Search Here</string>
+    <string name="icon_voice_search">Voice Search Icon</string>
+    <string name="icon_menu">Menu Icon</string>
+    <string name="icon_cancel">Cancel Icon</string>
+    <string name="icon_layer_fab">Layer Icon</string>
+    <string name="icon_north_fab">North Icon</string>
+    <string name="icon_direction_fab">Direction Icon</string>
+    <string name="icon_current_fab">Current Location Icon</string>
 </resources>
