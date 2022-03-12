@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:lineSpacingExtra="3dp"
-            android:text="@string/jan_dhan_darshan"
+            android:text="@string/jan_dhan_darshak"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="24sp"

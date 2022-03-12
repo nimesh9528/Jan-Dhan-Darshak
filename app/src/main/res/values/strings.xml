@@ -5,7 +5,7 @@
     <string name="post_office">Post Office</string>
     <string name="csc">CSC</string>
     <string name="bank_mitra">Bank Mitra</string>
-    <string name="jan_dhan_darshan">Jan Dhan\nDarshan</string>
+    <string name="jan_dhan_darshak">Jan Dhan\nDarshak</string>
     <string name="icon_search">Search Icon</string>
     <string name="search_here">Search Here</string>
     <string name="icon_voice_search">Voice Search Icon</string>
@@ -20,4 +20,11 @@
     <string name="open_now">Open Now</string>
     <string name="top_rated">Top Rated</string>
     <string name="icon_no_data">No Data Icon</string>
+    <string name="map_type">Map type</string>
+    <string name="icon_default_map_type">Default Map Type Icon</string>
+    <string name="icon_satellite_map_type">Satellite Map Type Icon</string>
+    <string name="icon_terrain_map_type">Terrain Map Type Icon</string>
+    <string name="default_map_type">Default</string>
+    <string name="satellite_map_type">Satellite</string>
+    <string name="terrain_map_type">Terrain</string>
 </resources>

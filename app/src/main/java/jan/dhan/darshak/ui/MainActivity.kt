@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -14,6 +15,7 @@ import com.bhardwaj.navigation.SlidingRootNav
 import com.bhardwaj.navigation.SlidingRootNavBuilder
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
 import jan.dhan.darshak.R
 import jan.dhan.darshak.databinding.ActivityMainBinding
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
     private lateinit var slidingRootNavBuilder: SlidingRootNav
+    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,48 +47,55 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.main -> {
-                    Toast.makeText(applicationContext, "Main", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Main", Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.branch -> {
-                    Toast.makeText(applicationContext, "Branch", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Branch", Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.post_office -> {
-                    Toast.makeText(applicationContext, "Post Office", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Post Office", Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.csc -> {
-                    Toast.makeText(applicationContext, "CSC", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "CSC", Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.bank_mitra -> {
-                    Toast.makeText(applicationContext, "Bank Mitra", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Bank Mitra", Toast.LENGTH_SHORT).show()
                 }
             }
             true
         }
+
         binding.ivVoiceSearch.setOnClickListener {
-            Toast.makeText(applicationContext, "Voice Search Icon", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, "Voice Search Icon", Toast.LENGTH_SHORT).show()
         }
+
         binding.ivMenu.setOnClickListener {
             if (slidingRootNavBuilder.isMenuOpened)
                 slidingRootNavBuilder.closeMenu(true)
             else
                 slidingRootNavBuilder.openMenu(true)
         }
+
         binding.mcvLayerContainer.setOnClickListener {
-            Toast.makeText(applicationContext, "Map Type Icon", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, "Map Type Icon", Toast.LENGTH_SHORT).show()
         }
+
         binding.mcvNorthFacingContainer.setOnClickListener {
-            Toast.makeText(applicationContext, "Face North Icon", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, "Face North Icon", Toast.LENGTH_SHORT).show()
         }
+
         binding.mcvCurrentContainer.setOnClickListener {
-            Toast.makeText(applicationContext, "Current Location Icon", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, "Current Location Icon", Toast.LENGTH_SHORT).show()
         }
+
         binding.mcvDirectionContainer.setOnClickListener {
-            Toast.makeText(applicationContext, "Directions Icon", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, "Directions Icon", Toast.LENGTH_SHORT).show()
         }
+
         binding.mcvRelevanceContainer.setOnClickListener {
             val linearLayout = binding.llFilter
             val linearLayoutChildCount = linearLayout.childCount
@@ -100,6 +110,7 @@ class MainActivity : AppCompatActivity() {
                     textView.setTextColor(resources.getColor(R.color.black, theme))
             }
         }
+
         binding.mcvDistanceContainer.setOnClickListener {
             val linearLayout = binding.llFilter
             val linearLayoutChildCount = linearLayout.childCount
@@ -114,6 +125,7 @@ class MainActivity : AppCompatActivity() {
                     textView.setTextColor(resources.getColor(R.color.black, theme))
             }
         }
+
         binding.mcvOpenNowContainer.setOnClickListener {
             val linearLayout = binding.llFilter
             val linearLayoutChildCount = linearLayout.childCount
@@ -128,6 +140,7 @@ class MainActivity : AppCompatActivity() {
                     textView.setTextColor(resources.getColor(R.color.black, theme))
             }
         }
+
         binding.mcvTopRatedContainer.setOnClickListener {
             val linearLayout = binding.llFilter
             val linearLayoutChildCount = linearLayout.childCount
@@ -142,6 +155,7 @@ class MainActivity : AppCompatActivity() {
                     textView.setTextColor(resources.getColor(R.color.black, theme))
             }
         }
+
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {}
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -193,8 +207,35 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
         binding.ivCloseIcon.setOnClickListener {
             binding.etSearch.setText("")
+        }
+
+        binding.mcvLayerContainer.setOnClickListener {
+            bottomSheetDialog.setContentView(R.layout.modal_bottom_sheet)
+            bottomSheetDialog.setCanceledOnTouchOutside(false)
+
+            bottomSheetDialog.findViewById<TextView>(R.id.tvDefaultMapType)?.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Default", Toast.LENGTH_SHORT).show()
+                bottomSheetDialog.dismiss()
+            }
+
+            bottomSheetDialog.findViewById<TextView>(R.id.tvSatelliteMapType)?.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Satellite", Toast.LENGTH_SHORT).show()
+                bottomSheetDialog.dismiss()
+            }
+
+            bottomSheetDialog.findViewById<TextView>(R.id.tvTerrainMapType)?.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Terrain", Toast.LENGTH_SHORT).show()
+                bottomSheetDialog.dismiss()
+            }
+
+            bottomSheetDialog.findViewById<ImageView>(R.id.ivCloseButton)?.setOnClickListener {
+                bottomSheetDialog.dismiss()
+            }
+
+            bottomSheetDialog.show()
         }
     }
 
@@ -206,5 +247,6 @@ class MainActivity : AppCompatActivity() {
             .inject()
 
         bottomSheetBehavior = BottomSheetBehavior.from(binding.mcvBottomSheetContainer)
+        bottomSheetDialog = BottomSheetDialog(this@MainActivity)
     }
 }
