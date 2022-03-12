@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/atm"
+        android:id="@+id/ATMFragment"
         android:icon="@drawable/icon_atm"
         android:title="@string/atm" />
 
     <item
-        android:id="@+id/branch"
+        android:id="@+id/BranchFragment"
         android:icon="@drawable/icon_branch"
         android:title="@string/branch" />
 
     <item
-        android:id="@+id/post_office"
+        android:id="@+id/PostOfficeFragment"
         android:icon="@drawable/icon_post_office"
         android:title="@string/post_office" />
 
     <item
-        android:id="@+id/csc"
+        android:id="@+id/CSCFragment"
         android:icon="@drawable/icon_csc"
         android:title="@string/csc" />
 
     <item
-        android:id="@+id/bank_mitra"
+        android:id="@+id/BankMitraFragment"
         android:icon="@drawable/icon_bank_mitra"
         android:title="@string/bank_mitra" />
 </menu>

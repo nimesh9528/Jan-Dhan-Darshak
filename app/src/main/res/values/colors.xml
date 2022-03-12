@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="navigationSelected">#E1473D</color>
+    <color name="navigationSelectedLight">#EA807A</color>
     <color name="navigationDefault">#878787</color>
 </resources>

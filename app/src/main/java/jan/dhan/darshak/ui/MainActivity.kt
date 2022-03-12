@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.bhardwaj.navigation.SlideGravity
 import com.bhardwaj.navigation.SlidingRootNavBuilder
 import jan.dhan.darshak.R
@@ -23,6 +26,11 @@ class MainActivity : AppCompatActivity() {
         }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment?
+        val navController = navHostFragment!!.navController
+        NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
 
         SlidingRootNavBuilder(this)
             .withMenuOpened(false)
