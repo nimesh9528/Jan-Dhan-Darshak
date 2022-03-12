@@ -17,4 +17,8 @@
     <string name="icon_north_fab">North Icon</string>
     <string name="icon_direction_fab">Direction Icon</string>
     <string name="icon_current_fab">Current Location Icon</string>
+    <string name="distance">Distance</string>
+    <string name="relevance">Relevance</string>
+    <string name="open_now">Open Now</string>
+    <string name="top_rated">Top Rated</string>
 </resources>
