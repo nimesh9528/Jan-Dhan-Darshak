@@ -13,6 +13,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bhardwaj.navigation.SlideGravity
 import com.bhardwaj.navigation.SlidingRootNav
 import com.bhardwaj.navigation.SlidingRootNavBuilder
+import com.bhardwaj.navigation.SlidingRootNavLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
     private lateinit var slidingRootNavBuilder: SlidingRootNav
+    private lateinit var slidingRootNavlayout: SlidingRootNavLayout
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -237,6 +239,40 @@ class MainActivity : AppCompatActivity() {
 
             bottomSheetDialog.show()
         }
+
+        slidingRootNavlayout.findViewById<TextView>(R.id.tvFavouriteLocation)?.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Favourites", Toast.LENGTH_SHORT).show()
+            slidingRootNavBuilder.closeMenu(true)
+        }
+
+        slidingRootNavlayout.findViewById<TextView>(R.id.tvMissingBank)?.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Missing Bank", Toast.LENGTH_SHORT).show()
+            slidingRootNavBuilder.closeMenu(true)
+        }
+
+        slidingRootNavlayout.findViewById<TextView>(R.id.tvFeedback)?.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Feedback", Toast.LENGTH_SHORT).show()
+            slidingRootNavBuilder.closeMenu(true)
+        }
+
+        slidingRootNavlayout.findViewById<TextView>(R.id.tvHelp)?.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Help", Toast.LENGTH_SHORT).show()
+            slidingRootNavBuilder.closeMenu(true)
+        }
+
+        slidingRootNavlayout.findViewById<TextView>(R.id.tvAboutUs)?.setOnClickListener {
+            Toast.makeText(this@MainActivity, "About Us", Toast.LENGTH_SHORT).show()
+            slidingRootNavBuilder.closeMenu(true)
+        }
+
+        slidingRootNavlayout.findViewById<TextView>(R.id.tvDisclaimer)?.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Disclaimer", Toast.LENGTH_SHORT).show()
+            slidingRootNavBuilder.closeMenu(true)
+        }
+
+        slidingRootNavlayout.findViewById<ImageView>(R.id.ivCloseButton)?.setOnClickListener {
+            slidingRootNavBuilder.closeMenu(true)
+        }
     }
 
     private fun initialise() {
@@ -246,6 +282,7 @@ class MainActivity : AppCompatActivity() {
             .withMenuLayout(R.layout.navigation_drawer)
             .inject()
 
+        slidingRootNavlayout = slidingRootNavBuilder.layout!!
         bottomSheetBehavior = BottomSheetBehavior.from(binding.mcvBottomSheetContainer)
         bottomSheetDialog = BottomSheetDialog(this@MainActivity)
     }

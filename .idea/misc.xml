@@ -14,8 +14,10 @@
         <entry key="app/src/main/res/drawable/icon_csc.xml" value="0.1235" />
         <entry key="app/src/main/res/drawable/icon_current_location_fab.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/icon_direction_fab.xml" value="0.168" />
+        <entry key="app/src/main/res/drawable/icon_favourite_location.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/icon_layer_fab.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/icon_location_fab.xml" value="0.1465" />
+        <entry key="app/src/main/res/drawable/icon_missing_bank.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/icon_north_fab.xml" value="0.168" />
         <entry key="app/src/main/res/drawable/icon_north_facing_fab.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/icon_search.xml" value="0.1465" />
