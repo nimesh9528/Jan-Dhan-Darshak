@@ -9,7 +9,6 @@ import com.bhardwaj.navigation.SlideGravity
 import com.bhardwaj.navigation.SlidingRootNavBuilder
 import jan.dhan.darshak.R
 import jan.dhan.darshak.databinding.ActivityMainBinding
-import jan.dhan.darshak.fragments.MainFragment
 import jan.dhan.darshak.viewmodels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -58,9 +57,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initialise() {
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, MainFragment())
-            .commit()
-
         SlidingRootNavBuilder(this)
             .withMenuOpened(false)
             .withGravity(SlideGravity.RIGHT)
