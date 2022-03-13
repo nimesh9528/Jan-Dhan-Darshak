@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import jan.dhan.darshak.R
 import jan.dhan.darshak.adapter.PlacesAdapter.PlacesViewHolder
-import jan.dhan.darshak.ui.MainActivity
 
 class PlacesAdapter(
     private val context: Context,
-    private val places: ArrayList<HashMap<String, String>>
+    private val places: ArrayList<HashMap<String?, String?>?>
 ) : RecyclerView.Adapter<PlacesViewHolder>() {
 
     var currentLocation: LatLng? = null
@@ -40,31 +39,26 @@ class PlacesAdapter(
 
     override fun onBindViewHolder(holder: PlacesViewHolder, position: Int) {
         val googlePlace = places[position]
-        val latitude = googlePlace["lat"]?.toDouble()
-        val longitude = googlePlace["lng"]?.toDouble()
-        val heading = googlePlace["place_name"]
+        val latitude = googlePlace?.get("lat")?.toDouble()
+        val longitude = googlePlace?.get("lng")?.toDouble()
+        val heading = googlePlace?.get("place_name")
         val location =
             if (latitude != null && longitude != null) LatLng(latitude, longitude) else null
-        val address = googlePlace["vicinity"]
+        val address = googlePlace?.get("vicinity")
 
         if (heading != null)
             holder.tvResultHeading.text = heading
 
         if (address != null)
             holder.tvAddress.text = address
-
-        holder.clSinglePlace.setOnClickListener {
-            if (context is MainActivity)
-                location?.let { it1 -> context.goToMarker(it1) }
-        }
     }
 
     override fun getItemCount() = places.size
 
-    fun updateList(places: ArrayList<java.util.HashMap<String?, String?>?>, location: LatLng) {
+    fun updateList(newPlaces: ArrayList<HashMap<String?, String?>?>, location: LatLng) {
         places.clear()
-        places.addAll(places)
+        places.addAll(newPlaces)
         currentLocation = location
-        notifyDataSetChanged()
+        notifyItemRangeInserted(0, newPlaces.size)
     }
 }
