@@ -1,29 +1,36 @@
 <resources>
-    <string name="app_name">Jan Dhan Darshak</string>
+    <string name="app_name" translatable="false">Jan Dhan Darshak</string>
+    <string name="listen_icon" translatable="false">Listen Icon</string>
+    <string name="icon_direction" translatable="false">Directions Icon</string>
+    <string name="icon_call" translatable="false">Call Icon</string>
+    <string name="icon_save" translatable="false">Save Icon</string>
+    <string name="icon_share" translatable="false">Share Icon</string>
+    <string name="icon_voice_search" translatable="false">Voice Search Icon</string>
+    <string name="icon_menu" translatable="false">Menu Icon</string>
+    <string name="icon_cancel" translatable="false">Cancel Icon</string>
+    <string name="icon_layer_fab" translatable="false">Layer Icon</string>
+    <string name="icon_north_fab" translatable="false">North Icon</string>
+    <string name="icon_direction_fab" translatable="false">Direction Icon</string>
+    <string name="icon_current_fab" translatable="false">Current Location Icon</string>
+    <string name="icon_search" translatable="false">Search Icon</string>
+    <string name="icon_no_data" translatable="false">No Data Icon</string>
+    <string name="icon_default_map_type" translatable="false">Default Map Type Icon</string>
+    <string name="icon_satellite_map_type" translatable="false">Satellite Map Type Icon</string>
+    <string name="icon_terrain_map_type" translatable="false">Terrain Map Type Icon</string>
+    <string name="app_logo" translatable="false">App Logo</string>
+
     <string name="atm">ATM</string>
     <string name="branch">Branch</string>
     <string name="post_office">Post Office</string>
     <string name="csc">CSC</string>
     <string name="bank_mitra">Bank Mitra</string>
     <string name="jan_dhan_darshak">Jan Dhan\nDarshak</string>
-    <string name="icon_search">Search Icon</string>
     <string name="search_here">Search Here</string>
-    <string name="icon_voice_search">Voice Search Icon</string>
-    <string name="icon_menu">Menu Icon</string>
-    <string name="icon_cancel">Cancel Icon</string>
-    <string name="icon_layer_fab">Layer Icon</string>
-    <string name="icon_north_fab">North Icon</string>
-    <string name="icon_direction_fab">Direction Icon</string>
-    <string name="icon_current_fab">Current Location Icon</string>
     <string name="distance">Distance</string>
     <string name="relevance">Relevance</string>
     <string name="open_now">Open Now</string>
     <string name="top_rated">Top Rated</string>
-    <string name="icon_no_data">No Data Icon</string>
     <string name="map_type">Map type</string>
-    <string name="icon_default_map_type">Default Map Type Icon</string>
-    <string name="icon_satellite_map_type">Satellite Map Type Icon</string>
-    <string name="icon_terrain_map_type">Terrain Map Type Icon</string>
     <string name="default_map_type">Default</string>
     <string name="satellite_map_type">Satellite</string>
     <string name="terrain_map_type">Terrain</string>
@@ -34,13 +41,7 @@
     <string name="about_us">About Us</string>
     <string name="disclaimer">Disclaimer</string>
     <string name="version">Version: 1.0.0</string>
-    <string name="app_logo">App Logo</string>
     <string name="sample_atm">City Union Bank ATM</string>
     <string name="sample_address">National Highway 58 · 0.1 mi</string>
     <string name="sample_timings">Open · Closes 23:30</string>
-    <string name="listen_icon">Listen Icon</string>
-    <string name="icon_direction">Directions Icon</string>
-    <string name="icon_call">Call Icon</string>
-    <string name="icon_save">Save Icon</string>
-    <string name="icon_share">Share Icon</string>
 </resources>
