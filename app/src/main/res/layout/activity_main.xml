@@ -10,8 +10,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/sample_map">
+        android:layout_height="match_parent">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_google_maps"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcvSearchView"

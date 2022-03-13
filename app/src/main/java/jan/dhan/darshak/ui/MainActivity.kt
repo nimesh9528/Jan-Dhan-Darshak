@@ -14,6 +14,12 @@ import com.bhardwaj.navigation.SlideGravity
 import com.bhardwaj.navigation.SlidingRootNav
 import com.bhardwaj.navigation.SlidingRootNavBuilder
 import com.bhardwaj.navigation.SlidingRootNavLayout
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -23,13 +29,14 @@ import jan.dhan.darshak.databinding.ActivityMainBinding
 import jan.dhan.darshak.viewmodels.MainActivityViewModel
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
     private lateinit var slidingRootNavBuilder: SlidingRootNav
     private lateinit var slidingRootNavlayout: SlidingRootNavLayout
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var mMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -301,5 +308,21 @@ class MainActivity : AppCompatActivity() {
         slidingRootNavlayout = slidingRootNavBuilder.layout!!
         bottomSheetBehavior = BottomSheetBehavior.from(binding.mcvBottomSheetContainer)
         bottomSheetDialog = BottomSheetDialog(this@MainActivity)
+
+        (supportFragmentManager.findFragmentById(R.id.fragment_google_maps) as SupportMapFragment).getMapAsync(
+            this
+        )
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        val sydney = LatLng(-34.0, 151.0)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(sydney)
+                .title("Marker in Sydney")
+        )
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 }
