@@ -35,4 +35,12 @@
     <string name="disclaimer">Disclaimer</string>
     <string name="version">Version: 1.0.0</string>
     <string name="app_logo">App Logo</string>
+    <string name="sample_atm">City Union Bank ATM</string>
+    <string name="sample_address">National Highway 58 · 0.1 mi</string>
+    <string name="sample_timings">Open · Closes 23:30</string>
+    <string name="listen_icon">Listen Icon</string>
+    <string name="icon_direction">Directions Icon</string>
+    <string name="icon_call">Call Icon</string>
+    <string name="icon_save">Save Icon</string>
+    <string name="icon_share">Share Icon</string>
 </resources>

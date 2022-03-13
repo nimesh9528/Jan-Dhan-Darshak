@@ -10,7 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/sample_map">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcvSearchView"
@@ -319,6 +320,111 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/icon_direction_fab"
                 android:src="@drawable/icon_direction_fab" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcvPinnedContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="51dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            android:background="@color/white"
+            android:elevation="8dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="16dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvPinnedHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/sample_atm"
+                    android:textColor="@color/hint_text_color"
+                    android:textSize="18sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvPinnedAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/sample_address"
+                    android:textColor="@color/hint_text_color"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPinnedHeading" />
+
+                <TextView
+                    android:id="@+id/tvPinnedTimings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/sample_timings"
+                    android:textColor="@color/hint_text_color"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPinnedAddress" />
+
+                <ImageView
+                    android:id="@+id/ivPinnedSpeak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="@string/listen_icon"
+                    android:src="@drawable/icon_speak"
+                    app:layout_constraintBottom_toBottomOf="@id/tvPinnedHeading"
+                    app:layout_constraintStart_toEndOf="@id/tvPinnedHeading"
+                    app:layout_constraintTop_toTopOf="@id/tvPinnedHeading" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPinnedTimings">
+
+                    <ImageView
+                        android:id="@+id/ivPinnedDirectionIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/icon_direction"
+                        android:src="@drawable/icon_directions" />
+
+                    <ImageView
+                        android:id="@+id/ivPinnedCallIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/icon_call"
+                        android:src="@drawable/icon_call" />
+
+                    <ImageView
+                        android:id="@+id/ivPinnedSaveIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/icon_save"
+                        android:src="@drawable/icon_save" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

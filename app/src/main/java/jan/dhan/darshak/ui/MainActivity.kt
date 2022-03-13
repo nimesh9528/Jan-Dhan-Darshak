@@ -273,6 +273,22 @@ class MainActivity : AppCompatActivity() {
         slidingRootNavlayout.findViewById<ImageView>(R.id.ivCloseButton)?.setOnClickListener {
             slidingRootNavBuilder.closeMenu(true)
         }
+
+        binding.ivPinnedDirectionIcon.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Directions", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.ivPinnedCallIcon.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Call", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.ivPinnedSaveIcon.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Save", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.ivPinnedSpeak.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Speak Out Load", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initialise() {
