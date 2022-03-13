@@ -1,14 +1,18 @@
 package jan.dhan.darshak.ui
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,17 +21,22 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bhardwaj.navigation.SlideGravity
 import com.bhardwaj.navigation.SlidingRootNav
 import com.bhardwaj.navigation.SlidingRootNavBuilder
 import com.bhardwaj.navigation.SlidingRootNavLayout
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -35,7 +44,6 @@ import com.google.android.material.card.MaterialCardView
 import jan.dhan.darshak.R
 import jan.dhan.darshak.databinding.ActivityMainBinding
 import jan.dhan.darshak.viewmodels.MainActivityViewModel
-
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMainBinding
@@ -50,6 +58,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private var previousSelectedMarker: Marker? = null
     private var selectedMarkerLocation: LatLng? = null
     private lateinit var voiceResult: ActivityResultLauncher<Intent>
+    private lateinit var placesClient: PlacesClient
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var lastKnownLocation: Location? = null
+    private var lastCameraPosition: CameraPosition? = null
+    private var locationPermissionGranted = false
+
+    companion object {
+        private const val DEFAULT_ZOOM = 15F
+        private const val KEY_CAMERA_POSITION = "camera_position"
+        private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+        private const val KEY_LOCATION = "location"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +80,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (savedInstanceState != null) {
+            lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION)
+            lastCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION)
+        }
 
         initialise()
         clickListeners()
@@ -78,23 +103,31 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         bottomSheetBehavior = BottomSheetBehavior.from(binding.mcvBottomSheetContainer)
         bottomSheetDialog = BottomSheetDialog(this@MainActivity)
 
+        currentLocation = LatLng(28.6089031, 77.2115711)
+
+        Places.initialize(this@MainActivity, getString(R.string.maps_api_key))
+        placesClient = Places.createClient(this@MainActivity)
+
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(this@MainActivity)
+
         (supportFragmentManager.findFragmentById(R.id.fragment_google_maps) as SupportMapFragment).getMapAsync(
-            this
+            this@MainActivity
         )
-        currentLocation = LatLng(27.1751496, 78.0399535)
 
-        voiceResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val spokenText =
-                    result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+        voiceResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val spokenText =
+                        result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
 
-                if (!spokenText.isNullOrEmpty()) {
-                    binding.etSearch.setText(spokenText[0])
-                    mGoogleMap.clear()
-                    selectedMarker = null
+                    if (!spokenText.isNullOrEmpty()) {
+                        binding.etSearch.setText(spokenText[0])
+                        mGoogleMap.clear()
+                        selectedMarker = null
+                    }
                 }
             }
-        }
     }
 
     private fun clickListeners() {
@@ -125,11 +158,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding.ivVoiceSearch.setOnClickListener {
             voiceResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-            putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-            )
-        })
+                putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+            })
         }
 
         binding.ivMenu.setOnClickListener {
@@ -139,22 +172,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                 slidingRootNavBuilder.openMenu(true)
         }
 
-        binding.mcvLayerContainer.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Map Type Icon", Toast.LENGTH_SHORT).show()
-        }
-
         binding.mcvNorthFacingContainer.setOnClickListener {
-            val cameraPosition = CameraPosition
-                .builder(mGoogleMap.cameraPosition)
-                //.bearing()
-                .build()
-            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+            val cameraPosition = lastKnownLocation?.let { it1 ->
+                CameraPosition
+                    .builder(mGoogleMap.cameraPosition)
+                    .bearing(it1.bearing)
+                    .build()
+            }
+            cameraPosition?.let { it1 ->
+                CameraUpdateFactory.newCameraPosition(
+                    it1
+                )
+            }?.let { it2 -> mGoogleMap.animateCamera(it2) }
         }
 
         binding.mcvCurrentContainer.setOnClickListener {
             val cameraPosition = CameraPosition
                 .builder(mGoogleMap.cameraPosition)
-                .zoom(15F)
+                .zoom(DEFAULT_ZOOM)
                 .target(LatLng(currentLocation.latitude, currentLocation.longitude))
                 .build()
             mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
@@ -364,41 +399,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        mGoogleMap = googleMap
-        mGoogleMap.addMarker(
-            MarkerOptions()
-                .position(currentLocation)
-                .title("Taj Mahal")
-                .icon(bitmapFromVector(R.drawable.icon_marker))
-        )
-
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15F))
-
-        mGoogleMap.setOnMarkerClickListener { marker ->
-            selectedMarkerLocation = marker.position
-            selectedMarker = marker
-
-            if (previousSelectedMarker != null)
-                previousSelectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker))
-
-            selectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker_selected))
-            previousSelectedMarker = selectedMarker
-
-            true
-        }
-
-        mGoogleMap.setOnMapClickListener {
-            if (selectedMarker != null)
-                selectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker))
-
-            selectedMarkerLocation = currentLocation
-            selectedMarker = null
-            previousSelectedMarker = null
-        }
-    }
-
     private fun bitmapFromVector(vectorResId: Int): BitmapDescriptor {
         val vectorDrawable = ContextCompat.getDrawable(this@MainActivity, vectorResId)
         vectorDrawable!!.setBounds(
@@ -418,5 +418,133 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         vectorDrawable.draw(canvas)
 
         return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mGoogleMap = googleMap
+
+        mGoogleMap.setOnMarkerClickListener { marker ->
+            selectedMarkerLocation = marker.position
+            selectedMarker = marker
+
+            if (previousSelectedMarker != null)
+                previousSelectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker))
+
+            selectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker_selected))
+            previousSelectedMarker = selectedMarker
+
+            true
+        }
+        mGoogleMap.setOnMapClickListener {
+            if (selectedMarker != null)
+                selectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker))
+
+            selectedMarkerLocation = currentLocation
+            selectedMarker = null
+            previousSelectedMarker = null
+        }
+
+        getLocationPermission()
+        updateLocationUI()
+        getDeviceLocation()
+    }
+
+    private fun updateLocationUI() {
+        try {
+            if (locationPermissionGranted) {
+                mGoogleMap.isMyLocationEnabled = true
+                mGoogleMap.uiSettings.isMyLocationButtonEnabled = true
+            } else {
+                mGoogleMap.isMyLocationEnabled = false
+                mGoogleMap.uiSettings.isMyLocationButtonEnabled = false
+                lastKnownLocation = null
+                getLocationPermission()
+            }
+        } catch (e: SecurityException) {
+            Log.e("Exception: %s", e.message, e)
+        }
+    }
+
+    private fun getLocationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this.applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            locationPermissionGranted = true
+        } else {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
+            )
+        }
+    }
+
+    private fun getDeviceLocation() {
+        try {
+            if (locationPermissionGranted) {
+                val locationResult = fusedLocationProviderClient.lastLocation
+                locationResult.addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        lastKnownLocation = task.result
+                        if (lastKnownLocation != null) {
+                            currentLocation = LatLng(task.result.latitude, task.result.longitude)
+
+                            mGoogleMap.addMarker(
+                                MarkerOptions()
+                                    .position(currentLocation)
+                                    .title("Your Location")
+                                    .icon(bitmapFromVector(R.drawable.icon_marker))
+                            )
+
+                            mGoogleMap.moveCamera(
+                                CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(
+                                        lastKnownLocation!!.latitude,
+                                        lastKnownLocation!!.longitude
+                                    ), DEFAULT_ZOOM
+                                )
+                            )
+                        }
+                    } else {
+                        mGoogleMap.moveCamera(
+                            CameraUpdateFactory
+                                .newLatLngZoom(currentLocation, DEFAULT_ZOOM)
+                        )
+                        mGoogleMap.uiSettings.isMyLocationButtonEnabled = false
+                    }
+                }
+            }
+        } catch (e: SecurityException) {
+            Log.e("Exception: %s", e.message, e)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        mGoogleMap.let { map ->
+            outState.putParcelable(KEY_CAMERA_POSITION, map.cameraPosition)
+            outState.putParcelable(KEY_LOCATION, lastKnownLocation)
+        }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        locationPermissionGranted = false
+        when (requestCode) {
+            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
+                if (grantResults.isNotEmpty() &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED
+                ) {
+                    locationPermissionGranted = true
+                }
+            }
+            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+        updateLocationUI()
     }
 }
