@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mcvRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="8dp"
@@ -13,10 +14,10 @@
         android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/fragment_google_maps"
-            android:name="com.google.android.gms.maps.SupportMapFragment" />
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcvSearchView"
@@ -333,9 +334,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="51dp"
             android:layout_marginBottom="16dp"
-            android:visibility="gone"
             android:background="@color/white"
             android:elevation="8dp"
+            android:visibility="gone"
             app:cardCornerRadius="24dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -344,9 +345,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingHorizontal="8dp"
-                android:paddingVertical="16dp"
-                android:layout_height="wrap_content">
+                android:paddingVertical="16dp">
 
                 <TextView
                     android:id="@+id/tvPinnedHeading"
@@ -483,6 +484,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/ivNoDataIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
@@ -492,6 +494,20 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mcvScroller" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvLocationList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:clipToPadding="false"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mcvScroller"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/single_location" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

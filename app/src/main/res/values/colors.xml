@@ -15,5 +15,6 @@
     <color name="text_color">#595656</color>
     <color name="blue_color">#FF0C91FF</color>
     <color name="divider_color">#dad8d8</color>
+    <color name="marker_color">#F03A3A</color>
 
 </resources>

@@ -1,5 +1,7 @@
 package jan.dhan.darshak.ui
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bhardwaj.navigation.SlideGravity
 import com.bhardwaj.navigation.SlidingRootNav
@@ -18,6 +21,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -36,7 +41,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var slidingRootNavBuilder: SlidingRootNav
     private lateinit var slidingRootNavlayout: SlidingRootNavLayout
     private lateinit var bottomSheetDialog: BottomSheetDialog
-    private lateinit var mMap: GoogleMap
+    private lateinit var mGoogleMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         initialise()
         clickListeners()
+    }
+
+    private fun initialise() {
+        slidingRootNavBuilder = SlidingRootNavBuilder(this)
+            .withMenuOpened(false)
+            .withDragDistance(225)
+            .withRootViewScale(0.85F)
+            .withGravity(SlideGravity.RIGHT)
+            .withMenuLayout(R.layout.navigation_drawer)
+            .inject()
+
+        slidingRootNavlayout = slidingRootNavBuilder.layout!!
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.mcvBottomSheetContainer)
+        bottomSheetDialog = BottomSheetDialog(this@MainActivity)
+
+        (supportFragmentManager.findFragmentById(R.id.fragment_google_maps) as SupportMapFragment).getMapAsync(
+            this
+        )
     }
 
     private fun clickListeners() {
@@ -226,17 +249,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             bottomSheetDialog.setCanceledOnTouchOutside(false)
 
             bottomSheetDialog.findViewById<TextView>(R.id.tvDefaultMapType)?.setOnClickListener {
-                Toast.makeText(this@MainActivity, "Default", Toast.LENGTH_SHORT).show()
+                mGoogleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
                 bottomSheetDialog.dismiss()
             }
 
             bottomSheetDialog.findViewById<TextView>(R.id.tvSatelliteMapType)?.setOnClickListener {
-                Toast.makeText(this@MainActivity, "Satellite", Toast.LENGTH_SHORT).show()
+                mGoogleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
                 bottomSheetDialog.dismiss()
             }
 
             bottomSheetDialog.findViewById<TextView>(R.id.tvTerrainMapType)?.setOnClickListener {
-                Toast.makeText(this@MainActivity, "Terrain", Toast.LENGTH_SHORT).show()
+                mGoogleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
                 bottomSheetDialog.dismiss()
             }
 
@@ -298,31 +321,38 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun initialise() {
-        slidingRootNavBuilder = SlidingRootNavBuilder(this)
-            .withMenuOpened(false)
-            .withGravity(SlideGravity.RIGHT)
-            .withMenuLayout(R.layout.navigation_drawer)
-            .inject()
-
-        slidingRootNavlayout = slidingRootNavBuilder.layout!!
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.mcvBottomSheetContainer)
-        bottomSheetDialog = BottomSheetDialog(this@MainActivity)
-
-        (supportFragmentManager.findFragmentById(R.id.fragment_google_maps) as SupportMapFragment).getMapAsync(
-            this
-        )
-    }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+        mGoogleMap = googleMap
 
         val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(
+        mGoogleMap.addMarker(
             MarkerOptions()
                 .position(sydney)
                 .title("Marker in Sydney")
+                .icon(bitmapFromVector(R.drawable.icon_marker))
         )
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    }
+
+    private fun bitmapFromVector(vectorResId: Int): BitmapDescriptor {
+        val vectorDrawable = ContextCompat.getDrawable(this@MainActivity, vectorResId)
+        vectorDrawable!!.setBounds(
+            0,
+            0,
+            vectorDrawable.intrinsicWidth,
+            vectorDrawable.intrinsicHeight
+        )
+
+        val bitmap = Bitmap.createBitmap(
+            vectorDrawable.intrinsicWidth,
+            vectorDrawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+
+        val canvas = Canvas(bitmap)
+        vectorDrawable.draw(canvas)
+
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 }
