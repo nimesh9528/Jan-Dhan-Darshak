@@ -1,14 +1,20 @@
 package jan.dhan.darshak.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -21,10 +27,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -39,9 +42,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
     private lateinit var slidingRootNavBuilder: SlidingRootNav
-    private lateinit var slidingRootNavlayout: SlidingRootNavLayout
+    private lateinit var slidingRootNavLayout: SlidingRootNavLayout
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var mGoogleMap: GoogleMap
+    private lateinit var currentLocation: LatLng
+    private var selectedMarker: Marker? = null
+    private var previousSelectedMarker: Marker? = null
+    private var selectedMarkerLocation: LatLng? = null
+    private lateinit var voiceResult: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,43 +74,62 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             .withMenuLayout(R.layout.navigation_drawer)
             .inject()
 
-        slidingRootNavlayout = slidingRootNavBuilder.layout!!
+        slidingRootNavLayout = slidingRootNavBuilder.layout!!
         bottomSheetBehavior = BottomSheetBehavior.from(binding.mcvBottomSheetContainer)
         bottomSheetDialog = BottomSheetDialog(this@MainActivity)
 
         (supportFragmentManager.findFragmentById(R.id.fragment_google_maps) as SupportMapFragment).getMapAsync(
             this
         )
+        currentLocation = LatLng(27.1751496, 78.0399535)
+
+        voiceResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val spokenText =
+                    result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+
+                if (!spokenText.isNullOrEmpty()) {
+                    binding.etSearch.setText(spokenText[0])
+                    mGoogleMap.clear()
+                    selectedMarker = null
+                }
+            }
+        }
     }
 
     private fun clickListeners() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.main -> {
-                    Toast.makeText(this@MainActivity, "Main", Toast.LENGTH_SHORT).show()
+                    binding.etSearch.setText(R.string.atm)
                 }
 
                 R.id.branch -> {
-                    Toast.makeText(this@MainActivity, "Branch", Toast.LENGTH_SHORT).show()
+                    binding.etSearch.setText(R.string.branch)
                 }
 
                 R.id.post_office -> {
-                    Toast.makeText(this@MainActivity, "Post Office", Toast.LENGTH_SHORT).show()
+                    binding.etSearch.setText(R.string.post_office)
                 }
 
                 R.id.csc -> {
-                    Toast.makeText(this@MainActivity, "CSC", Toast.LENGTH_SHORT).show()
+                    binding.etSearch.setText(R.string.csc)
                 }
 
                 R.id.bank_mitra -> {
-                    Toast.makeText(this@MainActivity, "Bank Mitra", Toast.LENGTH_SHORT).show()
+                    binding.etSearch.setText(R.string.bank_mitra)
                 }
             }
             true
         }
 
         binding.ivVoiceSearch.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Voice Search Icon", Toast.LENGTH_SHORT).show()
+            voiceResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+        })
         }
 
         binding.ivMenu.setOnClickListener {
@@ -117,15 +144,31 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.mcvNorthFacingContainer.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Face North Icon", Toast.LENGTH_SHORT).show()
+            val cameraPosition = CameraPosition
+                .builder(mGoogleMap.cameraPosition)
+                //.bearing()
+                .build()
+            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         }
 
         binding.mcvCurrentContainer.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Current Location Icon", Toast.LENGTH_SHORT).show()
+            val cameraPosition = CameraPosition
+                .builder(mGoogleMap.cameraPosition)
+                .zoom(15F)
+                .target(LatLng(currentLocation.latitude, currentLocation.longitude))
+                .build()
+            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         }
 
         binding.mcvDirectionContainer.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Directions Icon", Toast.LENGTH_SHORT).show()
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("google.navigation:q=" + selectedMarkerLocation?.latitude + "," + selectedMarkerLocation?.longitude)
+            ).also {
+                it.`package` = "com.google.android.apps.maps"
+                if (it.resolveActivity(packageManager) != null)
+                    startActivity(it)
+            }
         }
 
         binding.mcvRelevanceContainer.setOnClickListener {
@@ -270,37 +313,37 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             bottomSheetDialog.show()
         }
 
-        slidingRootNavlayout.findViewById<TextView>(R.id.tvFavouriteLocation)?.setOnClickListener {
+        slidingRootNavLayout.findViewById<TextView>(R.id.tvFavouriteLocation)?.setOnClickListener {
             Toast.makeText(this@MainActivity, "Favourites", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
         }
 
-        slidingRootNavlayout.findViewById<TextView>(R.id.tvMissingBank)?.setOnClickListener {
+        slidingRootNavLayout.findViewById<TextView>(R.id.tvMissingBank)?.setOnClickListener {
             Toast.makeText(this@MainActivity, "Missing Bank", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
         }
 
-        slidingRootNavlayout.findViewById<TextView>(R.id.tvFeedback)?.setOnClickListener {
+        slidingRootNavLayout.findViewById<TextView>(R.id.tvFeedback)?.setOnClickListener {
             Toast.makeText(this@MainActivity, "Feedback", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
         }
 
-        slidingRootNavlayout.findViewById<TextView>(R.id.tvHelp)?.setOnClickListener {
+        slidingRootNavLayout.findViewById<TextView>(R.id.tvHelp)?.setOnClickListener {
             Toast.makeText(this@MainActivity, "Help", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
         }
 
-        slidingRootNavlayout.findViewById<TextView>(R.id.tvAboutUs)?.setOnClickListener {
+        slidingRootNavLayout.findViewById<TextView>(R.id.tvAboutUs)?.setOnClickListener {
             Toast.makeText(this@MainActivity, "About Us", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
         }
 
-        slidingRootNavlayout.findViewById<TextView>(R.id.tvDisclaimer)?.setOnClickListener {
+        slidingRootNavLayout.findViewById<TextView>(R.id.tvDisclaimer)?.setOnClickListener {
             Toast.makeText(this@MainActivity, "Disclaimer", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
         }
 
-        slidingRootNavlayout.findViewById<ImageView>(R.id.ivCloseButton)?.setOnClickListener {
+        slidingRootNavLayout.findViewById<ImageView>(R.id.ivCloseButton)?.setOnClickListener {
             slidingRootNavBuilder.closeMenu(true)
         }
 
@@ -324,15 +367,36 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mGoogleMap = googleMap
-
-        val sydney = LatLng(-34.0, 151.0)
         mGoogleMap.addMarker(
             MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney")
+                .position(currentLocation)
+                .title("Taj Mahal")
                 .icon(bitmapFromVector(R.drawable.icon_marker))
         )
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15F))
+
+        mGoogleMap.setOnMarkerClickListener { marker ->
+            selectedMarkerLocation = marker.position
+            selectedMarker = marker
+
+            if (previousSelectedMarker != null)
+                previousSelectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker))
+
+            selectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker_selected))
+            previousSelectedMarker = selectedMarker
+
+            true
+        }
+
+        mGoogleMap.setOnMapClickListener {
+            if (selectedMarker != null)
+                selectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker))
+
+            selectedMarkerLocation = currentLocation
+            selectedMarker = null
+            previousSelectedMarker = null
+        }
     }
 
     private fun bitmapFromVector(vectorResId: Int): BitmapDescriptor {

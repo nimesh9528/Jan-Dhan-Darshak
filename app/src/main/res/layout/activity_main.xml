@@ -46,7 +46,8 @@
                     android:layout_weight="1"
                     android:contentDescription="@string/icon_search"
                     android:paddingVertical="12dp"
-                    android:src="@drawable/icon_search" />
+                    android:src="@drawable/icon_search"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/ivCloseIcon"
@@ -58,7 +59,7 @@
                     android:contentDescription="@string/icon_cancel"
                     android:paddingVertical="6dp"
                     android:src="@drawable/icon_cancel"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <EditText
                     android:id="@+id/etSearch"
@@ -70,11 +71,13 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_medium"
                     android:hint="@string/search_here"
+                    android:imeOptions="actionGo"
                     android:inputType="textPostalAddress"
                     android:maxLength="14"
                     android:maxLines="1"
                     android:paddingStart="16dp"
                     android:paddingEnd="0dp"
+                    android:text="@string/atm"
                     android:textAlignment="textStart"
                     android:textColor="@color/text_color"
                     android:textColorHint="@color/hint_text_color"
