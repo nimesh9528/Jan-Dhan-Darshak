@@ -42,6 +42,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCa
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
 import jan.dhan.darshak.R
+import jan.dhan.darshak.adapter.PlacesAdapter
 import jan.dhan.darshak.databinding.ActivityMainBinding
 import jan.dhan.darshak.viewmodels.MainActivityViewModel
 
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private var locationPermissionGranted = false
 
     companion object {
-        private const val DEFAULT_ZOOM = 15F
+        private const val DEFAULT_ZOOM = 14F
         private const val KEY_CAMERA_POSITION = "camera_position"
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
         private const val KEY_LOCATION = "location"
@@ -187,6 +188,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.mcvCurrentContainer.setOnClickListener {
+            if (ActivityCompat.checkSelfPermission(
+                    this@MainActivity,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this@MainActivity,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) return@setOnClickListener
+
+            mGoogleMap.isMyLocationEnabled = true
+
             val cameraPosition = CameraPosition
                 .builder(mGoogleMap.cameraPosition)
                 .zoom(DEFAULT_ZOOM)
@@ -467,7 +479,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun getLocationPermission() {
         if (ContextCompat.checkSelfPermission(
-                this.applicationContext,
+                this@MainActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
             == PackageManager.PERMISSION_GRANTED
@@ -475,7 +487,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             locationPermissionGranted = true
         } else {
             ActivityCompat.requestPermissions(
-                this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                this@MainActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
             )
         }
@@ -485,19 +497,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         try {
             if (locationPermissionGranted) {
                 val locationResult = fusedLocationProviderClient.lastLocation
-                locationResult.addOnCompleteListener(this) { task ->
+                locationResult.addOnCompleteListener(this@MainActivity) { task ->
                     if (task.isSuccessful) {
                         lastKnownLocation = task.result
                         if (lastKnownLocation != null) {
                             currentLocation = LatLng(task.result.latitude, task.result.longitude)
-
-                            mGoogleMap.addMarker(
-                                MarkerOptions()
-                                    .position(currentLocation)
-                                    .title("Your Location")
-                                    .icon(bitmapFromVector(R.drawable.icon_marker))
-                            )
-
                             mGoogleMap.moveCamera(
                                 CameraUpdateFactory.newLatLngZoom(
                                     LatLng(
