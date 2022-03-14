@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/drawable/icon_location_fab.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/icon_marker.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/icon_marker_selected.xml" value="0.1545" />
+        <entry key="app/src/main/res/drawable/icon_menu.xml" value="0.1545" />
         <entry key="app/src/main/res/drawable/icon_missing_bank.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/icon_north_fab.xml" value="0.168" />
         <entry key="app/src/main/res/drawable/icon_north_facing_fab.xml" value="0.1465" />
@@ -26,7 +27,7 @@
         <entry key="app/src/main/res/drawable/icon_speak.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/shadow.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/splash_logo.xml" value="0.168" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20237945556640624" />
         <entry key="app/src/main/res/layout/bottom_sheet.xml" value="0.17291666666666666" />
         <entry key="app/src/main/res/layout/fragment_atm.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_bank_mitra.xml" value="0.193359375" />
