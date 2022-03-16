@@ -23,6 +23,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.text.HtmlCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bhardwaj.navigation.SlideGravity
 import com.bhardwaj.navigation.SlidingRootNav
 import com.bhardwaj.navigation.SlidingRootNavBuilder
@@ -41,6 +44,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCa
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
 import jan.dhan.darshak.R
+import jan.dhan.darshak.adapter.PlacesAdapter
 import jan.dhan.darshak.api.Api
 import jan.dhan.darshak.api.GooglePlaces
 import jan.dhan.darshak.databinding.ActivityMainBinding
@@ -73,7 +77,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var currentLanguage: String
     private var selectedCategory: String = "atm"
     private var selectedFilter: String = "prominence"
-    private lateinit var placesList: ArrayList<HashMap<String?, String?>?>
+    private var clickedFromBottomNavigation: Boolean = false
+    private var placesList: ArrayList<HashMap<String?, String?>?> = arrayListOf()
+    private lateinit var placesAdapter: PlacesAdapter
+    private var textToSpeech: TextToSpeech? = null
+    private val explanationFragment = ExplanationFragment()
+    private val formFragment = FormFragment()
 
     companion object {
         private const val DEFAULT_ZOOM = 14F
@@ -133,19 +142,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                         binding.etSearch.setText(spokenText[0])
                         selectedMarker = null
 
-                        if (selectedFilter == "openNow" || selectedFilter == "topRated")
-                            getNearbyPointsFromAPI(
-                                keyword = spokenText[0],
-                                openNow = "true"
-                            )
-                        else
-                            getNearbyPointsFromAPI(
-                                keyword = spokenText[0].lowercase(),
-                                rankBy = selectedFilter,
-                            )
-                    }
-                }
-            }
+        placesAdapter = PlacesAdapter(this@MainActivity, placesList)
+
+        binding.rvLocationList.also {
+            it.layoutManager =
+                LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            it.adapter = placesAdapter
+            it.overScrollMode = View.OVER_SCROLL_NEVER
+            it.addItemDecoration(
+                DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL)
+            )
+        }
     }
 
     private fun clickListeners() {
