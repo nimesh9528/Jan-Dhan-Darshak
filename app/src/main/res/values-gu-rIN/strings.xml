@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">જન ધન દર્શક</string>
+    <string name="atm">એટીએમ</string>
+    <string name="branch">શાખા</string>
+    <string name="post_office">ડાકઘર</string>
+    <string name="csc">સીએસસી</string>
+    <string name="bank_mitra">બેંક મિત્ર</string>
+    <string name="jan_dhan_darshak">જન ધન\nદર્શક</string>
+    <string name="search_here">અહીં શોધો</string>
+    <string name="distance">અંતર</string>
+    <string name="relevance">સુસંગતતા</string>
+    <string name="open_now">હવે ખોલો</string>
+    <string name="top_rated">ઉત્તમ</string>
+    <string name="map_type">નકશાનો પ્રકાર</string>
+    <string name="default_map_type">ડિફૉલ્ટ</string>
+    <string name="satellite_map_type">ઉપગ્રહ</string>
+    <string name="terrain_map_type">ભૂપ્રદેશ</string>
+    <string name="favourite_locations">મનપસંદ સ્થાનો</string>
+    <string name="missing_bank">બેંક ખૂટે છે</string>
+    <string name="feedback">પ્રતિભાવ</string>
+    <string name="faq">મદદ</string>
+    <string name="about_us">અમારા વિશે</string>
+    <string name="disclaimer">અસ્વીકરણ</string>
+    <string name="version">સંસ્કરણ: 1.0.0</string>
+    <string name="about_us_text">જન ધન દર્શક મોબાઇલ એપ્લિકેશન નાગરિકોને ભારતમાં બેંક શાખાઓ, એટીએમ, બેંક મિત્ર સ્થાનો ધરાવતી બેંકિંગ ઇન્ફ્રાસ્ટ્રક્ચર જોવા માટે ઇન્ટરફેસ પ્રદાન કરે છે. આ ડેટા જાહેર અને ખાનગી બંને ક્ષેત્રની શેડ્યૂલ કોમર્શિયલ બેંકો પાસેથી નાણાકીય સેવાઓ વિભાગ દ્વારા એકત્રિત કરવામાં આવે છે.</string>
+    <string name="disclaimer_text">મોબાઇલ એપ્લિકેશનમાં સમાવિષ્ટ માહિતી વિવિધ અનુસૂચિત વ્યાપારી બેંકો દ્વારા પ્રદાન કરવામાં આવે છે અને તેની જાળવણી કરવામાં આવે છે. કોઈપણ ડેટાની ચોકસાઈ અથવા ચલણ વિશે કોઈ ગેરેંટી આપવામાં આવતી નથી. તેથી, કોઈ પણ સંજોગોમાં નાણાકીય સેવાઓ વિભાગ અથવા તેના ઘટકો કોઈપણ વિશિષ્ટ, પરોક્ષ અથવા પરિણામી નુકસાન અથવા કોઈપણ નુકસાન, ઉપયોગ, ડેટા અથવા નફાના નુકસાનને પરિણામે કોઈપણ નુકસાન માટે જવાબદાર રહેશે નહીં, પછી ભલે તે સંપર્ક, બેદરકારી અથવા અન્ય કાર્યવાહીમાં હોય. , અહીં આપેલી માહિતીના ઉપયોગથી અથવા તેના સંબંધમાં ઉદ્ભવે છે. વેબસાઈટ બેંકિંગ ઈન્ફ્રાસ્ટ્રક્ચરના ગૌણ પ્રતિનિધિત્વ તરીકે સેવા આપવા માટે બનાવવામાં આવી છે, અને અનુસૂચિત કોમર્શિયલ બેંકો દ્વારા તેનું પાલન કરવામાં આવે છે જે આ જાહેર માહિતી માટે પ્રાથમિક સ્ત્રોત છે. આ વેબસાઇટના વપરાશકર્તાઓને આથી સૂચિત કરવામાં આવે છે કે અહીં પ્રસ્તુત માહિતીની ચકાસણી માટે આ પ્રાથમિક સ્ત્રોતોનો સંપર્ક કરવો જોઈએ. અને નાણાકીય સેવાઓ વિભાગ અથવા તેના ઘટકો અને સોફ્ટવેર ડેવલપર, NIC, આ વેબસાઇટ પરની માહિતી માટે કોઈ કાનૂની જવાબદારી લેતા નથી.</string>
+    <string name="closed">બંધ</string>
+    <string name="closes">બંધ કરે છે</string>
+    <string name="name">NAME</string>
+    <string name="bank_name">બેંકનું નામ</string>
+    <string name="email_id">ઈમેલ આઈડી</string>
+    <string name="Suggestion">સૂચન</string>
+    <string name="mobile_number">મોબાઇલ નંબર</string>
+    <string name="send_suggestion">સૂચન મોકલો</string>
+    <string name="send_feedback">પ્રતિસાદ મોકલ</string>
+</resources>

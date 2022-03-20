@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">Jan Dhan Darshak</string>
     <string name="listen_icon" translatable="false">Listen Icon</string>
     <string name="icon_direction" translatable="false">Directions Icon</string>
     <string name="icon_call" translatable="false">Call Icon</string>
@@ -18,7 +17,16 @@
     <string name="icon_satellite_map_type" translatable="false">Satellite Map Type Icon</string>
     <string name="icon_terrain_map_type" translatable="false">Terrain Map Type Icon</string>
     <string name="app_logo" translatable="false">App Logo</string>
+    <string name="sample_atm" translatable="false">City Union Bank ATM</string>
+    <string name="sample_address" translatable="false">National Highway 58 · 0.1 mi</string>
+    <string name="sample_timings" translatable="false">Open · Closes 23:30</string>
+    <string name="sample_name" translatable="false">Aditya</string>
+    <string name="sample_mail" translatable="false">aditya@gmail.com</string>
+    <string name="sample_number" translatable="false">+91 123456789</string>
+    <string name="sample_bank" translatable="false">Axis Bank</string>
+    <string name="sample_suggestion" translatable="false">Your suggestion goes here…</string>
 
+    <string name="app_name">Jan Dhan Darshak</string>
     <string name="atm">ATM</string>
     <string name="branch">Branch</string>
     <string name="post_office">Post Office</string>
@@ -37,11 +45,19 @@
     <string name="favourite_locations">Favourite Locations</string>
     <string name="missing_bank">Missing Bank</string>
     <string name="feedback">Feedback</string>
-    <string name="help">Help</string>
+    <string name="faq">FAQs</string>
     <string name="about_us">About Us</string>
     <string name="disclaimer">Disclaimer</string>
     <string name="version">Version: 1.0.0</string>
-    <string name="sample_atm">City Union Bank ATM</string>
-    <string name="sample_address">National Highway 58 · 0.1 mi</string>
-    <string name="sample_timings">Open · Closes 23:30</string>
+    <string name="about_us_text">The Jan Dhan Darshak Mobile application provides an interface for citizen to view the banking infrastructure in India consisting of Bank Branches, ATMs, Bank Mitra locations. The data is collated by Department of Financial services from schedule commercial Banks both public and private sector.</string>
+    <string name="disclaimer_text">The information contained in the mobile application is provided and maintained by various scheduled commercial banks. No guarantee is given as to the accuracy or currency of any of the data. Therefore, in no event shall Department of Financial Services or its constituents be liable for any special, indirect or consequential damages or any damages whatsoever resulting from loss of use,data, or profits, whether in an action of contact, negligence,or other action, arising out of or in connection with the use of the information herein provided. The website is designed to serve as a secondary representation of Banking infrastructure, and is complied from the scheduled commercial Banks which are the primary sources for this public information. Users of this website are hereby notified that these primary sources should be consulted for verification of the information presented here. And Department of Financial Services or its constituents and the software developer,NIC, assume no legal responsibility for the information on this website.</string>
+    <string name="closed">Closed</string>
+    <string name="closes">Closes</string>
+    <string name="name">NAME</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="email_id">Email ID</string>
+    <string name="Suggestion">Suggestion</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="send_suggestion">Send Suggestion</string>
+    <string name="send_feedback">Send Feedback</string>
 </resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">जन धन दर्शक</string>
+    <string name="atm">एटीएम</string>
+    <string name="branch">डाली</string>
+    <string name="post_office">डाक बंगला</string>
+    <string name="csc">सीएससी</string>
+    <string name="bank_mitra">बैंक मित्र</string>
+    <string name="jan_dhan_darshak">जन धन\nदर्शक</string>
+    <string name="search_here">यहाँ ढूँढे</string>
+    <string name="distance">दूरी</string>
+    <string name="relevance">प्रासंगिकता</string>
+    <string name="open_now">अब खोलो</string>
+    <string name="top_rated">टॉप रेटेड</string>
+    <string name="map_type">नक्शा प्रकार</string>
+    <string name="default_map_type">चूक जाना</string>
+    <string name="satellite_map_type">उपग्रह</string>
+    <string name="terrain_map_type">इलाके</string>
+    <string name="favourite_locations">पसंदीदा स्थान</string>
+    <string name="missing_bank">लापता बैंक</string>
+    <string name="feedback">प्रतिपुष्टि</string>
+    <string name="faq">सामान्य प्रश्न</string>
+    <string name="about_us">हमारे बारे में</string>
+    <string name="disclaimer">अस्वीकरण</string>
+    <string name="version">संस्करण: 1.0.0</string>
+    <string name="about_us_text">जन धन दर्शक मोबाइल एप्लिकेशन नागरिकों को बैंक शाखाओं, एटीएम, बैंक मित्र स्थानों से युक्त भारत में बैंकिंग बुनियादी ढांचे को देखने के लिए एक इंटरफ़ेस प्रदान करता है। डेटा को वित्तीय सेवा विभाग द्वारा सार्वजनिक और निजी दोनों क्षेत्रों के अनुसूचित वाणिज्यिक बैंकों से एकत्रित किया जाता है।</string>
+    <string name="disclaimer_text">मोबाइल एप्लिकेशन में निहित जानकारी विभिन्न अनुसूचित वाणिज्यिक बैंकों द्वारा प्रदान और रखरखाव की जाती है। किसी भी डेटा की सटीकता या मुद्रा की कोई गारंटी नहीं दी जाती है। इसलिए, किसी भी घटना में वित्तीय सेवा विभाग या उसके घटक किसी भी विशेष, अप्रत्यक्ष या परिणामी नुकसान या किसी भी नुकसान के लिए उत्तरदायी नहीं होंगे, जो कि उपयोग, डेटा या मुनाफे के नुकसान के परिणामस्वरूप हो, चाहे संपर्क, लापरवाही या अन्य कार्रवाई की कार्रवाई में हो। , यहां प्रदान की गई जानकारी के उपयोग के संबंध में या उसके संबंध में। वेबसाइट को बैंकिंग बुनियादी ढांचे के द्वितीयक प्रतिनिधित्व के रूप में कार्य करने के लिए डिज़ाइन किया गया है, और अनुसूचित वाणिज्यिक बैंकों से अनुपालन किया जाता है जो इस सार्वजनिक जानकारी के प्राथमिक स्रोत हैं। इस वेबसाइट के उपयोगकर्ताओं को एतद्द्वारा सूचित किया जाता है कि यहां प्रस्तुत जानकारी के सत्यापन के लिए इन प्राथमिक स्रोतों से परामर्श किया जाना चाहिए। और वित्तीय सेवा विभाग या उसके घटक और सॉफ्टवेयर डेवलपर, एनआईसी, इस वेबसाइट पर जानकारी के लिए कोई कानूनी जिम्मेदारी नहीं लेते हैं।</string>
+    <string name="closed">बंद किया हुआ</string>
+    <string name="closes">बंद होने का समय</string>
+    <string name="name">नाम</string>
+    <string name="bank_name">बैंक का नाम</string>
+    <string name="email_id">ईमेल आईडी</string>
+    <string name="Suggestion">सुझाव</string>
+    <string name="mobile_number">मोबाइल नंबर</string>
+    <string name="send_suggestion">सुझाव भेजें</string>
+    <string name="send_feedback">प्रतिक्रिया भेजें</string>
+</resources>

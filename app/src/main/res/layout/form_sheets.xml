@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/indian_flag"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivCloseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/icon_cancel"
+        android:padding="16dp"
+        android:src="@drawable/icon_back"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/tvExplanationHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        tools:text="Page Heading" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/white"
+        android:elevation="16dp"
+        app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:id="@+id/llInputFields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="32dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:id="@+id/tvNameHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_horizontal"
+                android:text="@string/name"
+                android:textColor="@color/navigationDefault"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints="name"
+                android:background="@null"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center|start"
+                android:hint="@string/sample_name"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName|textAutoComplete|textAutoCorrect"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_text_color"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <View
+                android:id="@+id/viewName"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="38dp"
+                android:background="@color/divider_color" />
+
+            <TextView
+                android:id="@+id/tvMobileNumberHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_horizontal"
+                android:text="@string/mobile_number"
+                android:textColor="@color/navigationDefault"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etMobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints="phone"
+                android:background="@null"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center|start"
+                android:hint="@string/sample_number"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_text_color"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <View
+                android:id="@+id/viewMobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="38dp"
+                android:background="@color/divider_color" />
+
+            <TextView
+                android:id="@+id/tvEmailIdHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_horizontal"
+                android:text="@string/email_id"
+                android:textColor="@color/navigationDefault"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etEmailId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints="emailAddress"
+                android:background="@null"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center|start"
+                android:hint="@string/sample_mail"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress|textAutoComplete"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_text_color"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <View
+                android:id="@+id/viewEmailId"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="38dp"
+                android:background="@color/divider_color" />
+
+            <TextView
+                android:id="@+id/tvBankNameHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_horizontal"
+                android:text="@string/bank_name"
+                android:textColor="@color/navigationDefault"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etBankName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints="name"
+                android:background="@null"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center|start"
+                android:hint="@string/sample_bank"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_text_color"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <View
+                android:id="@+id/viewBankName"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color" />
+
+            <TextView
+                android:id="@+id/tvSuggestionHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_horizontal"
+                android:text="@string/Suggestion"
+                android:textColor="@color/navigationDefault"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etSuggestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints="name"
+                android:background="@null"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center|start"
+                android:hint="@string/sample_suggestion"
+                android:imeOptions="actionDone"
+                android:inputType="textCapSentences|textAutoComplete|textAutoCorrect|textLongMessage|textImeMultiLine|textMultiLine"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_text_color"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/viewSuggestion"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvSendButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/bg_button_corner"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="center"
+                android:minHeight="45dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                tools:text="@string/send_suggestion" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

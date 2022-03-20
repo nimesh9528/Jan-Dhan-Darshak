@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ਜਨ ਧਨ ਦਰਸ਼ਕ</string>
+    <string name="atm">ਏ.ਟੀ.ਐਮ</string>
+    <string name="branch">ਸ਼ਾਖਾ</string>
+    <string name="post_office">ਡਾਕਖਾਨਾ</string>
+    <string name="csc">CSC</string>
+    <string name="bank_mitra">ਬੈਂਕ ਮਿੱਤਰਾ</string>
+    <string name="jan_dhan_darshak">ਜਨ ਧਨ\nਦਰਸ਼ਕ</string>
+    <string name="search_here">ਇੱਥੇ ਖੋਜ ਕਰੋ</string>
+    <string name="distance">ਦੂਰੀ</string>
+    <string name="relevance">ਸਾਰਥਕ</string>
+    <string name="open_now">ਹੁਣੇ ਖੋਲ੍ਹੋ</string>
+    <string name="top_rated">ਚੋਟੀ ਦੇ ਦਰਜਾ</string>
+    <string name="map_type">ਨਕਸ਼ੇ ਦੀ ਕਿਸਮ</string>
+    <string name="default_map_type">ਡਿਫਾਲਟ</string>
+    <string name="satellite_map_type">ਸੈਟੇਲਾਈਟ</string>
+    <string name="terrain_map_type">ਭੂਮੀ</string>
+    <string name="favourite_locations">ਮਨਪਸੰਦ ਸਥਾਨ</string>
+    <string name="missing_bank">ਬੈਂਕ ਗੁੰਮ ਹੈ</string>
+    <string name="feedback">ਸੁਝਾਅ</string>
+    <string name="faq">ਮਦਦ ਕਰੋ</string>
+    <string name="about_us">ਸਾਡੇ ਬਾਰੇ</string>
+    <string name="disclaimer">ਬੇਦਾਅਵਾ</string>
+    <string name="version">ਸੰਸਕਰਣ: 1.0.0</string>
+    <string name="about_us_text">ਜਨ ਧਨ ਦਰਸ਼ਕ ਮੋਬਾਈਲ ਐਪਲੀਕੇਸ਼ਨ ਭਾਰਤ ਵਿੱਚ ਬੈਂਕ ਸ਼ਾਖਾਵਾਂ, ਏਟੀਐਮ, ਬੈਂਕ ਮਿੱਤਰ ਸਥਾਨਾਂ ਵਾਲੇ ਬੈਂਕਿੰਗ ਬੁਨਿਆਦੀ ਢਾਂਚੇ ਨੂੰ ਦੇਖਣ ਲਈ ਨਾਗਰਿਕਾਂ ਲਈ ਇੱਕ ਇੰਟਰਫੇਸ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ। ਡੇਟਾ ਨੂੰ ਵਿੱਤੀ ਸੇਵਾਵਾਂ ਵਿਭਾਗ ਦੁਆਰਾ ਸ਼ਡਿਊਲ ਕਮਰਸ਼ੀਅਲ ਬੈਂਕਾਂ ਦੋਵਾਂ ਜਨਤਕ ਅਤੇ ਪ੍ਰਾਈਵੇਟ ਸੈਕਟਰਾਂ ਤੋਂ ਇਕੱਠਾ ਕੀਤਾ ਗਿਆ ਹੈ।</string>
+    <string name="disclaimer_text">ਮੋਬਾਈਲ ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਸ਼ਾਮਲ ਜਾਣਕਾਰੀ ਵੱਖ-ਵੱਖ ਅਨੁਸੂਚਿਤ ਵਪਾਰਕ ਬੈਂਕਾਂ ਦੁਆਰਾ ਪ੍ਰਦਾਨ ਕੀਤੀ ਅਤੇ ਸੰਭਾਲੀ ਜਾਂਦੀ ਹੈ। ਕਿਸੇ ਵੀ ਡੇਟਾ ਦੀ ਸ਼ੁੱਧਤਾ ਜਾਂ ਮੁਦਰਾ ਬਾਰੇ ਕੋਈ ਗਾਰੰਟੀ ਨਹੀਂ ਦਿੱਤੀ ਗਈ ਹੈ। ਇਸ ਲਈ, ਕਿਸੇ ਵੀ ਸਥਿਤੀ ਵਿੱਚ ਵਿੱਤੀ ਸੇਵਾਵਾਂ ਦਾ ਵਿਭਾਗ ਜਾਂ ਇਸਦੇ ਹਿੱਸੇ ਕਿਸੇ ਵੀ ਵਿਸ਼ੇਸ਼, ਅਸਿੱਧੇ ਜਾਂ ਨਤੀਜੇ ਵਜੋਂ ਨੁਕਸਾਨ ਜਾਂ ਕਿਸੇ ਵੀ ਨੁਕਸਾਨ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹੋਣਗੇ ਜੋ ਵਰਤੋਂ, ਡੇਟਾ, ਜਾਂ ਮੁਨਾਫ਼ੇ ਦੇ ਨੁਕਸਾਨ ਦੇ ਨਤੀਜੇ ਵਜੋਂ, ਭਾਵੇਂ ਸੰਪਰਕ, ਲਾਪਰਵਾਹੀ, ਜਾਂ ਹੋਰ ਕਾਰਵਾਈ ਵਿੱਚ ਹੋਣ। , ਇੱਥੇ ਪ੍ਰਦਾਨ ਕੀਤੀ ਗਈ ਜਾਣਕਾਰੀ ਦੀ ਵਰਤੋਂ ਨਾਲ ਪੈਦਾ ਹੋਈ ਜਾਂ ਇਸ ਦੇ ਸਬੰਧ ਵਿੱਚ। ਵੈੱਬਸਾਈਟ ਨੂੰ ਬੈਂਕਿੰਗ ਬੁਨਿਆਦੀ ਢਾਂਚੇ ਦੀ ਸੈਕੰਡਰੀ ਨੁਮਾਇੰਦਗੀ ਕਰਨ ਲਈ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਹੈ, ਅਤੇ ਅਨੁਸੂਚਿਤ ਵਪਾਰਕ ਬੈਂਕਾਂ ਦੁਆਰਾ ਪਾਲਣਾ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਜੋ ਇਸ ਜਨਤਕ ਜਾਣਕਾਰੀ ਲਈ ਪ੍ਰਾਇਮਰੀ ਸਰੋਤ ਹਨ। ਇਸ ਵੈੱਬਸਾਈਟ ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਨੂੰ ਇੱਥੇ ਸੂਚਿਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਕਿ ਇੱਥੇ ਪੇਸ਼ ਕੀਤੀ ਗਈ ਜਾਣਕਾਰੀ ਦੀ ਤਸਦੀਕ ਲਈ ਇਹਨਾਂ ਪ੍ਰਾਇਮਰੀ ਸਰੋਤਾਂ ਦੀ ਸਲਾਹ ਲੈਣੀ ਚਾਹੀਦੀ ਹੈ। ਅਤੇ ਵਿੱਤੀ ਸੇਵਾਵਾਂ ਵਿਭਾਗ ਜਾਂ ਇਸਦੇ ਹਿੱਸੇ ਅਤੇ ਸਾਫਟਵੇਅਰ ਡਿਵੈਲਪਰ, NIC, ਇਸ ਵੈੱਬਸਾਈਟ \'ਤੇ ਦਿੱਤੀ ਜਾਣਕਾਰੀ ਲਈ ਕੋਈ ਕਾਨੂੰਨੀ ਜ਼ਿੰਮੇਵਾਰੀ ਨਹੀਂ ਲੈਂਦੇ ਹਨ।</string>
+    <string name="closed">ਬੰਦ</string>
+    <string name="closes">ਬੰਦ ਕਰਦਾ ਹੈ</string>
+    <string name="name">NAME</string>
+    <string name="bank_name">ਬੈਂਕ ਦਾ ਨਾਮ</string>
+    <string name="email_id">ਈਮੇਲ ਆਈ.ਡੀ</string>
+    <string name="Suggestion">ਸੁਝਾਅ</string>
+    <string name="mobile_number">ਮੋਬਾਈਲ ਨੰਬਰ</string>
+    <string name="send_suggestion">ਸੁਝਾਅ ਭੇਜੋ</string>
+    <string name="send_feedback">ਫੀਡਬੈਕ ਭੇਜੋ</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:height="250dp"
+        android:drawable="@drawable/indian_flag_saffron"
+        android:gravity="top" />
+
+    <item
+        android:height="250dp"
+        android:drawable="@drawable/indian_flag_green"
+        android:gravity="bottom" />
+</layer-list>

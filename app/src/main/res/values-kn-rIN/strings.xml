@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ಜನ್ ಧನ್ ದರ್ಶಕ್</string>
+    <string name="atm">ಎಟಿಎಂ</string>
+    <string name="branch">ಶಾಖೆ</string>
+    <string name="post_office">ಅಂಚೆ ಕಛೇರಿ</string>
+    <string name="csc">CSC</string>
+    <string name="bank_mitra">ಬ್ಯಾಂಕ್ ಮಿತ್ರ</string>
+    <string name="jan_dhan_darshak">ಜನ್ ಧನ್\nದರ್ಶಕ್</string>
+    <string name="search_here">ಇಲ್ಲಿ ಹುಡುಕಿ</string>
+    <string name="distance">ದೂರ</string>
+    <string name="relevance">ಪ್ರಸ್ತುತತೆ</string>
+    <string name="open_now">ಈಗ ತೆರೆಯಿರಿ</string>
+    <string name="top_rated">ಅತ್ಯುತ್ತಮವಾದ</string>
+    <string name="map_type">ನಕ್ಷೆ ಪ್ರಕಾರ</string>
+    <string name="default_map_type">ಡೀಫಾಲ್ಟ್</string>
+    <string name="satellite_map_type">ಉಪಗ್ರಹ</string>
+    <string name="terrain_map_type">ಭೂ ಪ್ರದೇಶ</string>
+    <string name="favourite_locations">ಮೆಚ್ಚಿನ ಸ್ಥಳಗಳು</string>
+    <string name="missing_bank">ಬ್ಯಾಂಕ್ ಕಾಣೆಯಾಗಿದೆ</string>
+    <string name="feedback">ಪ್ರತಿಕ್ರಿಯೆ</string>
+    <string name="faq">ಸಹಾಯ</string>
+    <string name="about_us">ನಮ್ಮ ಬಗ್ಗೆ</string>
+    <string name="disclaimer">ಹಕ್ಕು ನಿರಾಕರಣೆ</string>
+    <string name="version">ಆವೃತ್ತಿ: 1.0.0</string>
+    <string name="about_us_text">ಬ್ಯಾಂಕ್ ಶಾಖೆಗಳು, ಎಟಿಎಂಗಳು, ಬ್ಯಾಂಕ್ ಮಿತ್ರ ಸ್ಥಳಗಳನ್ನು ಒಳಗೊಂಡಿರುವ ಭಾರತದಲ್ಲಿ ಬ್ಯಾಂಕಿಂಗ್ ಮೂಲಸೌಕರ್ಯವನ್ನು ವೀಕ್ಷಿಸಲು ಜನ್ ಧನ್ ದರ್ಶಕ್ ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್ ನಾಗರಿಕರಿಗೆ ಇಂಟರ್ಫೇಸ್ ಅನ್ನು ಒದಗಿಸುತ್ತದೆ. ಸಾರ್ವಜನಿಕ ಮತ್ತು ಖಾಸಗಿ ವಲಯದ ಶೆಡ್ಯೂಲ್ ವಾಣಿಜ್ಯ ಬ್ಯಾಂಕ್‌ಗಳಿಂದ ಹಣಕಾಸು ಸೇವೆಗಳ ಇಲಾಖೆಯಿಂದ ಡೇಟಾವನ್ನು ಒಟ್ಟುಗೂಡಿಸಲಾಗಿದೆ.</string>
+    <string name="disclaimer_text">ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್‌ನಲ್ಲಿರುವ ಮಾಹಿತಿಯನ್ನು ವಿವಿಧ ನಿಗದಿತ ವಾಣಿಜ್ಯ ಬ್ಯಾಂಕ್‌ಗಳು ಒದಗಿಸುತ್ತವೆ ಮತ್ತು ನಿರ್ವಹಿಸುತ್ತವೆ. ಯಾವುದೇ ಡೇಟಾದ ನಿಖರತೆ ಅಥವಾ ಕರೆನ್ಸಿಗೆ ಯಾವುದೇ ಗ್ಯಾರಂಟಿ ನೀಡಲಾಗುವುದಿಲ್ಲ. ಆದ್ದರಿಂದ, ಯಾವುದೇ ಸಂದರ್ಭದಲ್ಲಿ ಹಣಕಾಸು ಸೇವೆಗಳ ಇಲಾಖೆ ಅಥವಾ ಅದರ ಘಟಕಗಳು ಯಾವುದೇ ವಿಶೇಷ, ಪರೋಕ್ಷ ಅಥವಾ ಪರಿಣಾಮದ ಹಾನಿಗಳಿಗೆ ಅಥವಾ ಸಂಪರ್ಕ, ನಿರ್ಲಕ್ಷ್ಯ ಅಥವಾ ಇತರ ಕ್ರಿಯೆಯ ಕ್ರಿಯೆಯಲ್ಲಿ ಬಳಕೆ, ಡೇಟಾ ಅಥವಾ ಲಾಭದ ನಷ್ಟದಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ಹಾನಿಗಳಿಗೆ ಜವಾಬ್ದಾರರಾಗಿರುವುದಿಲ್ಲ. , ಇಲ್ಲಿ ಒದಗಿಸಿದ ಮಾಹಿತಿಯ ಬಳಕೆಯಿಂದ ಅಥವಾ ಅದಕ್ಕೆ ಸಂಬಂಧಿಸಿದಂತೆ ಉದ್ಭವಿಸುತ್ತದೆ. ವೆಬ್‌ಸೈಟ್ ಬ್ಯಾಂಕಿಂಗ್ ಮೂಲಸೌಕರ್ಯದ ದ್ವಿತೀಯ ಪ್ರಾತಿನಿಧ್ಯವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸಲು ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ ಮತ್ತು ಈ ಸಾರ್ವಜನಿಕ ಮಾಹಿತಿಗಾಗಿ ಪ್ರಾಥಮಿಕ ಮೂಲಗಳಾಗಿರುವ ನಿಗದಿತ ವಾಣಿಜ್ಯ ಬ್ಯಾಂಕ್‌ಗಳಿಂದ ಅನುಸರಿಸಲಾಗುತ್ತದೆ. ಈ ವೆಬ್‌ಸೈಟ್‌ನ ಬಳಕೆದಾರರಿಗೆ ಇಲ್ಲಿ ಪ್ರಸ್ತುತಪಡಿಸಿದ ಮಾಹಿತಿಯ ಪರಿಶೀಲನೆಗಾಗಿ ಈ ಪ್ರಾಥಮಿಕ ಮೂಲಗಳನ್ನು ಸಂಪರ್ಕಿಸಬೇಕು ಎಂದು ಸೂಚಿಸಲಾಗಿದೆ. ಮತ್ತು ಹಣಕಾಸು ಸೇವೆಗಳ ಇಲಾಖೆ ಅಥವಾ ಅದರ ಘಟಕಗಳು ಮತ್ತು ಸಾಫ್ಟ್‌ವೇರ್ ಡೆವಲಪರ್, NIC, ಈ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿನ ಮಾಹಿತಿಗೆ ಯಾವುದೇ ಕಾನೂನು ಜವಾಬ್ದಾರಿಯನ್ನು ಹೊಂದಿರುವುದಿಲ್ಲ.</string>
+    <string name="closed">ಮುಚ್ಚಲಾಗಿದೆ</string>
+    <string name="closes">ಮುಚ್ಚುತ್ತದೆ</string>
+    <string name="name">NAME</string>
+    <string name="bank_name">ಬ್ಯಾಂಕ್ ಹೆಸರು</string>
+    <string name="email_id">ಇಮೇಲ್ ಐಡಿ</string>
+    <string name="Suggestion">ಸಲಹೆ</string>
+    <string name="mobile_number">ಮೊಬೈಲ್ ನಂಬರ</string>
+    <string name="send_suggestion">ಸಲಹೆಯನ್ನು ಕಳುಹಿಸಿ</string>
+    <string name="send_feedback">ಪ್ರತಿಕ್ರಿಯೆ ಕಳುಹಿಸಿ</string>
+</resources>

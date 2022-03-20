@@ -26,6 +26,7 @@
             android:layout_margin="16dp"
             android:background="@color/white"
             android:elevation="8dp"
+            android:minHeight="48dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +36,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -57,9 +59,9 @@
                     android:layout_marginEnd="0dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/icon_cancel"
-                    android:paddingVertical="6dp"
                     android:src="@drawable/icon_cancel"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    app:tint="@color/hint_text_color" />
 
                 <EditText
                     android:id="@+id/etSearch"
@@ -80,6 +82,7 @@
                     android:textAlignment="textStart"
                     android:textColor="@color/text_color"
                     android:textColorHint="@color/hint_text_color"
+                    android:textCursorDrawable="@null"
                     android:textSize="16sp"
                     android:textStyle="normal"
                     android:theme="@android:style/Theme.Holo" />
@@ -88,7 +91,6 @@
                     android:id="@+id/ivVoiceSearch"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginVertical="12dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="0dp"
                     android:layout_weight="1"
@@ -96,21 +98,38 @@
                     android:clickable="true"
                     android:contentDescription="@string/icon_voice_search"
                     android:focusable="true"
-                    android:src="@drawable/icon_voice" />
+                    android:src="@drawable/icon_voice"
+                    app:tint="@color/hint_text_color" />
 
                 <ImageView
                     android:id="@+id/ivMenu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="12dp"
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:contentDescription="@string/icon_menu"
                     android:focusable="true"
-                    android:padding="4dp"
-                    android:src="@drawable/icon_menu" />
+                    android:src="@drawable/icon_menu"
+                    android:visibility="gone"
+                    app:tint="@color/hint_text_color" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/hint_text_color"
+                    android:indeterminateTintMode="src_atop"
+                    android:visibility="visible"
+                    app:tint="@color/hint_text_color" />
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -315,7 +334,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="52dp"
             android:elevation="10dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="10dp"
@@ -334,7 +353,7 @@
             android:id="@+id/mcvPinnedContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="51dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
             android:background="@color/white"
             android:elevation="8dp"
@@ -348,51 +367,87 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
+                android:paddingHorizontal="16dp"
                 android:paddingVertical="16dp">
 
                 <TextView
                     android:id="@+id/tvPinnedHeading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/sample_atm"
+                    android:maxLength="20"
+                    android:maxLines="1"
                     android:textColor="@color/hint_text_color"
                     android:textSize="18sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/sample_atm" />
 
                 <TextView
                     android:id="@+id/tvPinnedAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/sample_address"
+                    android:maxLines="1"
                     android:textColor="@color/hint_text_color"
                     android:textSize="12sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvPinnedHeading" />
+                    app:layout_constraintTop_toBottomOf="@id/tvPinnedHeading"
+                    tools:text="@string/sample_address" />
+
+                <RatingBar
+                    android:id="@+id/rbPinnedRatings"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:progressBackgroundTint="@color/navigationDefault"
+                    android:progressTint="@color/rating_color"
+                    android:secondaryProgressTint="@color/navigationDefault"
+                    android:stepSize="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPinnedAddress" />
+
+                <TextView
+                    android:id="@+id/tvPinnedRatingCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/hint_text_color"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@id/rbPinnedRatings"
+                    app:layout_constraintStart_toEndOf="@id/rbPinnedRatings"
+                    app:layout_constraintTop_toTopOf="@id/rbPinnedRatings" />
 
                 <TextView
                     android:id="@+id/tvPinnedTimings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/sample_timings"
                     android:textColor="@color/hint_text_color"
                     android:textSize="12sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvPinnedAddress" />
+                    app:layout_constraintTop_toBottomOf="@id/tvPinnedRatingCount"
+                    tools:text="@string/sample_timings" />
 
                 <ImageView
                     android:id="@+id/ivPinnedSpeak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="-8dp"
                     android:layout_marginStart="10dp"
                     android:contentDescription="@string/listen_icon"
+                    android:padding="8dp"
                     android:src="@drawable/icon_speak"
                     app:layout_constraintBottom_toBottomOf="@id/tvPinnedHeading"
                     app:layout_constraintStart_toEndOf="@id/tvPinnedHeading"
@@ -409,25 +464,25 @@
 
                     <ImageView
                         android:id="@+id/ivPinnedDirectionIcon"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="16dp"
                         android:contentDescription="@string/icon_direction"
                         android:src="@drawable/icon_directions" />
 
                     <ImageView
                         android:id="@+id/ivPinnedCallIcon"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="16dp"
                         android:contentDescription="@string/icon_call"
                         android:src="@drawable/icon_call" />
 
                     <ImageView
                         android:id="@+id/ivPinnedSaveIcon"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="16dp"
                         android:contentDescription="@string/icon_save"
                         android:src="@drawable/icon_save" />
                 </LinearLayout>
@@ -452,35 +507,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_navigation_menu" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.55" />
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline1">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/mcvBottomSheetContainer"
+                style="@style/CustomCardViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:elevation="16dp"
                 app:behavior_hideable="false"
-                app:behavior_peekHeight="96dp"
+                app:behavior_peekHeight="36dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="16dp"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="72dp">
+                    android:layout_height="wrap_content">
 
                     <View
                         android:id="@+id/mcvScroller"
                         android:layout_width="50dp"
                         android:layout_height="4dp"
                         android:layout_marginTop="16dp"
-                        android:background="@color/navigationDefault"
+                        android:background="@drawable/bg_round"
                         android:backgroundTint="@color/navigationDefault"
-                        android:padding="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -490,6 +555,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp"
                         android:contentDescription="@string/icon_no_data"
                         android:src="@drawable/icon_no_data"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -501,10 +567,10 @@
                         android:id="@+id/rvLocationList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:clipToPadding="false"
+                        android:layout_marginTop="16dp"
+                        android:overScrollMode="never"
+                        android:paddingBottom="48dp"
                         android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/mcvScroller"

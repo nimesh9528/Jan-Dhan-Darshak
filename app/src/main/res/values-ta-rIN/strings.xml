@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ஜன் தன் தர்ஷக்</string>
+    <string name="atm">ஏடிஎம்</string>
+    <string name="branch">கிளை</string>
+    <string name="post_office">தபால் அலுவலகம்</string>
+    <string name="csc">CSC</string>
+    <string name="bank_mitra">வங்கி மித்ரா</string>
+    <string name="jan_dhan_darshak">ஜன் தன்\nதர்ஷக்</string>
+    <string name="search_here">இங்கே தேடவும்</string>
+    <string name="distance">தூரம்</string>
+    <string name="relevance">சம்பந்தம்</string>
+    <string name="open_now">இப்போது திற</string>
+    <string name="top_rated">சிறந்த தரமதிப்பீடு</string>
+    <string name="map_type">வரைபட வகை</string>
+    <string name="default_map_type">இயல்புநிலை</string>
+    <string name="satellite_map_type">செயற்கைக்கோள்</string>
+    <string name="terrain_map_type">நிலப்பரப்பு</string>
+    <string name="favourite_locations">பிடித்த இடங்கள்</string>
+    <string name="missing_bank">வங்கியைக் காணவில்லை</string>
+    <string name="feedback">பின்னூட்டம்</string>
+    <string name="faq">அடிக்கடி கேட்கப்படும் கேள்விகள்</string>
+    <string name="about_us">எங்களை பற்றி</string>
+    <string name="disclaimer">மறுப்பு</string>
+    <string name="version">பதிப்பு: 1.0.0</string>
+    <string name="about_us_text">ஜன் தன் தர்ஷக் மொபைல் பயன்பாடு, வங்கிக் கிளைகள், ஏடிஎம்கள், வங்கி மித்ரா இருப்பிடங்கள் ஆகியவற்றைக் கொண்ட இந்தியாவில் உள்ள வங்கி உள்கட்டமைப்பைக் காண குடிமக்களுக்கு ஒரு இடைமுகத்தை வழங்குகிறது. பொது மற்றும் தனியார் துறையின் அட்டவணை வணிக வங்கிகளின் நிதிச் சேவைத் துறையால் தரவு தொகுக்கப்பட்டுள்ளது.</string>
+    <string name="disclaimer_text">மொபைல் பயன்பாட்டில் உள்ள தகவல்கள் பல்வேறு திட்டமிடப்பட்ட வணிக வங்கிகளால் வழங்கப்பட்டு பராமரிக்கப்படுகின்றன. எந்தவொரு தரவின் துல்லியம் அல்லது நாணயத்திற்கு எந்த உத்தரவாதமும் வழங்கப்படவில்லை. எனவே, எந்தவொரு நிகழ்விலும், தொடர்பு, அலட்சியம், அல்லது பிற செயலின் செயலாக இருந்தாலும், எந்தவொரு சிறப்பு, மறைமுக அல்லது விளைவான சேதங்கள் அல்லது பயன்பாடு, தரவு அல்லது இலாப இழப்பின் விளைவாக ஏற்படும் சேதங்களுக்கு நிதிச் சேவைகள் திணைக்களம் அல்லது அதன் அங்கத்தினர்கள் பொறுப்பேற்க மாட்டார்கள். , இங்கு வழங்கப்பட்ட தகவலைப் பயன்படுத்துவதால் அல்லது அது தொடர்பாக எழுகிறது. இந்த இணையதளமானது வங்கி உள்கட்டமைப்பின் இரண்டாம் நிலை பிரதிநிதித்துவமாக செயல்படும் வகையில் வடிவமைக்கப்பட்டுள்ளது, மேலும் இந்த பொது தகவலுக்கான முதன்மை ஆதாரமாக இருக்கும் திட்டமிடப்பட்ட வணிக வங்கிகளுக்கு இணங்குகிறது. இந்த இணையதளத்தைப் பயன்படுத்துபவர்கள், இங்கு கொடுக்கப்பட்டுள்ள தகவல்களைச் சரிபார்ப்பதற்காக இந்த முதன்மை ஆதாரங்களைக் கலந்தாலோசிக்க வேண்டும் என்று இதன்மூலம் அறிவிக்கப்படுகிறது. மேலும் நிதிச் சேவைகள் துறை அல்லது அதன் அங்கத்தினர்கள் மற்றும் மென்பொருள் உருவாக்குனர், NIC, இந்த இணையதளத்தில் உள்ள தகவல்களுக்கு எந்த சட்டப்பூர்வப் பொறுப்பையும் ஏற்காது.</string>
+    <string name="closed">மூடப்பட்டது</string>
+    <string name="closes">மூடுகிறது</string>
+    <string name="name">NAME</string>
+    <string name="bank_name">வங்கி பெயர்</string>
+    <string name="email_id">மின்னஞ்சல் முகவரி</string>
+    <string name="Suggestion">பரிந்துரை</string>
+    <string name="mobile_number">கைபேசி எண்</string>
+    <string name="send_suggestion">பரிந்துரையை அனுப்பவும்</string>
+    <string name="send_feedback">கருத்தினை அனுப்பவும்</string>
+</resources>

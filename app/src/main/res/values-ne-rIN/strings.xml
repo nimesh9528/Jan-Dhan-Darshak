@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">जन धन दर्शन</string>
+    <string name="atm">ATM</string>
+    <string name="branch">साखा</string>
+    <string name="post_office">हुलाक कार्यालय</string>
+    <string name="csc">CSC</string>
+    <string name="bank_mitra">बैंक मित्र</string>
+    <string name="jan_dhan_darshak">जन धन\nदर्शक</string>
+    <string name="search_here">यहाँ खोज्नुहोस्</string>
+    <string name="distance">दूरी</string>
+    <string name="relevance">सान्दर्भिकता</string>
+    <string name="open_now">अब खोल्नुहोस्</string>
+    <string name="top_rated">शीर्ष मूल्याङ्कन गरिएको</string>
+    <string name="map_type">नक्सा प्रकार</string>
+    <string name="default_map_type">पूर्वनिर्धारित</string>
+    <string name="satellite_map_type">उपग्रह</string>
+    <string name="terrain_map_type">भू-भाग</string>
+    <string name="favourite_locations">मनपर्ने स्थानहरू</string>
+    <string name="missing_bank">बैंक हराइरहेको छ</string>
+    <string name="feedback">प्रतिक्रिया</string>
+    <string name="faq">मद्दत गर्नुहोस्</string>
+    <string name="about_us">हाम्रोबारे</string>
+    <string name="disclaimer">अस्वीकरण</string>
+    <string name="version">संस्करण: १.०.०</string>
+    <string name="about_us_text">जन धन दर्शक मोबाइल अनुप्रयोगले नागरिकलाई बैंक शाखा, एटीएम, बैंक मित्र स्थानहरू समावेश गरी भारतमा बैंकिङ पूर्वाधार हेर्नको लागि इन्टरफेस प्रदान गर्दछ। वित्तीय सेवा विभागले सार्वजनिक र निजी क्षेत्रका अनुसूचित वाणिज्य बैंकहरूबाट तथ्यांक संकलन गरेको हो।</string>
+    <string name="disclaimer_text">मोबाइल एप्लिकेसनमा समावेश जानकारी विभिन्न अनुसूचित वाणिज्य बैंकहरूले प्रदान गरी राख्छन्। कुनै पनि डाटाको शुद्धता वा मुद्राको रूपमा कुनै ग्यारेन्टी दिइएको छैन। तसर्थ, कुनै पनि अवस्थामा वित्तीय सेवा विभाग वा यसका घटकहरू कुनै पनि विशेष, अप्रत्यक्ष वा परिणामात्मक क्षति वा प्रयोग, डाटा, वा नाफाको हानिबाट हुने कुनै पनि क्षतिको लागि उत्तरदायी हुनेछैन, चाहे सम्पर्क, लापरवाही वा अन्य कार्यमा। , यहाँ प्रदान गरिएको जानकारीको प्रयोगबाट उत्पन्न वा सम्बन्धमा। वेबसाइट बैंकिङ पूर्वाधारको माध्यमिक प्रतिनिधित्वको रूपमा सेवा गर्न डिजाइन गरिएको हो, र यो सार्वजनिक जानकारीको लागि प्राथमिक स्रोतहरू निर्धारित वाणिज्य बैंकहरूबाट पालना गरिएको छ। यस वेबसाइटका प्रयोगकर्ताहरूलाई यहाँ प्रस्तुत गरिएको जानकारीको प्रमाणीकरणको लागि यी प्राथमिक स्रोतहरूसँग परामर्श गरिनुपर्छ भनी सूचित गरिन्छ। र वित्तीय सेवा विभाग वा यसका घटकहरू र सफ्टवेयर विकासकर्ता, NIC, यस वेबसाइटमा जानकारीको लागि कुनै कानुनी जिम्मेवारी लिने छैन।</string>
+    <string name="closed">बन्द</string>
+    <string name="closes">बन्द हुन्छ</string>
+    <string name="name">NAME</string>
+    <string name="bank_name">बैंक नाम</string>
+    <string name="email_id">इमेल आईडी</string>
+    <string name="Suggestion">सुझाव</string>
+    <string name="mobile_number">मोबाइल नम्बर</string>
+    <string name="send_suggestion">सुझाव पठाउनुहोस्</string>
+    <string name="send_feedback">प्रतिक्रिया पठाउनुहोस्</string>
+</resources>

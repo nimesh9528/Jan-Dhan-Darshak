@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ജൻ ധന ദർശക്</string>
+    <string name="atm">എ.ടി.എം</string>
+    <string name="branch">ശാഖ</string>
+    <string name="post_office">പോസ്റ്റ് ഓഫീസ്</string>
+    <string name="csc">CSC</string>
+    <string name="bank_mitra">ബാങ്ക് മിത്ര</string>
+    <string name="jan_dhan_darshak">ജൻ ധൻ\nദർശക്</string>
+    <string name="search_here">ഇവിടെ തിരയുക</string>
+    <string name="distance">ദൂരം</string>
+    <string name="relevance">പ്രസക്തി</string>
+    <string name="open_now">ഇപ്പോൾ തുറക്കുക</string>
+    <string name="top_rated">മികച്ച റേറ്റിംഗ്</string>
+    <string name="map_type">മാപ്പ് തരം</string>
+    <string name="default_map_type">സ്ഥിരസ്ഥിതി</string>
+    <string name="satellite_map_type">ഉപഗ്രഹം</string>
+    <string name="terrain_map_type">ഭൂപ്രദേശം</string>
+    <string name="favourite_locations">പ്രിയപ്പെട്ട സ്ഥലങ്ങൾ</string>
+    <string name="missing_bank">കാണാതായ ബാങ്ക്</string>
+    <string name="feedback">പ്രതികരണം</string>
+    <string name="faq">പതിവുചോദ്യങ്ങൾ</string>
+    <string name="about_us">ഞങ്ങളേക്കുറിച്ച്</string>
+    <string name="disclaimer">നിരാകരണം</string>
+    <string name="version">പതിപ്പ്: 1.0.0</string>
+    <string name="about_us_text">ബാങ്ക് ശാഖകൾ, എടിഎമ്മുകൾ, ബാങ്ക് മിത്ര ലൊക്കേഷനുകൾ എന്നിവ ഉൾപ്പെടുന്ന ഇന്ത്യയിലെ ബാങ്കിംഗ് ഇൻഫ്രാസ്ട്രക്ചർ കാണുന്നതിന് ജൻ ധൻ ദർശക് മൊബൈൽ ആപ്ലിക്കേഷൻ പൗരന്മാർക്ക് ഒരു ഇന്റർഫേസ് നൽകുന്നു. പൊതുമേഖലയിലെയും സ്വകാര്യമേഖലയിലെയും ഷെഡ്യൂൾ വാണിജ്യ ബാങ്കുകളിൽ നിന്നുള്ള ഡിപ്പാർട്ട്മെന്റ് ഓഫ് ഫിനാൻഷ്യൽ സർവീസ് ഡാറ്റ സമാഹരിച്ചിരിക്കുന്നു.</string>
+    <string name="disclaimer_text">മൊബൈൽ ആപ്ലിക്കേഷനിൽ അടങ്ങിയിരിക്കുന്ന വിവരങ്ങൾ വിവിധ ഷെഡ്യൂൾഡ് വാണിജ്യ ബാങ്കുകൾ നൽകുകയും പരിപാലിക്കുകയും ചെയ്യുന്നു. ഏതെങ്കിലും ഡാറ്റയുടെ കൃത്യതയോ കറൻസിയോ സംബന്ധിച്ച് യാതൊരു ഗ്യാരണ്ടിയും നൽകിയിട്ടില്ല. അതിനാൽ, ഒരു കാരണവശാലും, സമ്പർക്കം, അശ്രദ്ധ, അല്ലെങ്കിൽ മറ്റ് പ്രവൃത്തികൾ എന്നിവയിൽ ഏതെങ്കിലും പ്രത്യേക, പരോക്ഷമായ അല്ലെങ്കിൽ അനന്തരഫലമായ നാശനഷ്ടങ്ങൾ അല്ലെങ്കിൽ ഉപയോഗം, ഡാറ്റ അല്ലെങ്കിൽ ലാഭം എന്നിവയുടെ നഷ്ടം മൂലമുണ്ടാകുന്ന ഏതെങ്കിലും നാശനഷ്ടങ്ങൾക്ക് സാമ്പത്തിക സേവന വകുപ്പോ അതിന്റെ ഘടകങ്ങളോ ബാധ്യസ്ഥരായിരിക്കില്ല. , ഇവിടെ നൽകിയിരിക്കുന്ന വിവരങ്ങളുടെ ഉപയോഗത്തിൽ നിന്നോ അതുമായി ബന്ധപ്പെട്ടോ ഉണ്ടാകുന്നതാണ്. വെബ്‌സൈറ്റ് രൂപകൽപ്പന ചെയ്‌തിരിക്കുന്നത് ബാങ്കിംഗ് ഇൻഫ്രാസ്ട്രക്ചറിന്റെ ദ്വിതീയ പ്രാതിനിധ്യമായി വർത്തിക്കുന്നതിനാണ്, കൂടാതെ ഈ പൊതുവിവരങ്ങളുടെ പ്രാഥമിക സ്രോതസ്സായ ഷെഡ്യൂൾഡ് വാണിജ്യ ബാങ്കുകളിൽ നിന്ന് ഇത് പാലിക്കപ്പെടുന്നു. ഈ വെബ്‌സൈറ്റിന്റെ ഉപയോക്താക്കൾക്ക് ഇവിടെ നൽകിയിരിക്കുന്ന വിവരങ്ങളുടെ സ്ഥിരീകരണത്തിനായി ഈ പ്രാഥമിക ഉറവിടങ്ങളുമായി ബന്ധപ്പെടണമെന്ന് ഇതിനാൽ അറിയിക്കുന്നു. കൂടാതെ ഡിപ്പാർട്ട്‌മെന്റ് ഓഫ് ഫിനാൻഷ്യൽ സർവീസസ് അല്ലെങ്കിൽ അതിന്റെ ഘടകങ്ങളും സോഫ്റ്റ്‌വെയർ ഡെവലപ്പർ, NIC, ഈ വെബ്‌സൈറ്റിലെ വിവരങ്ങളുടെ നിയമപരമായ ഉത്തരവാദിത്തം ഏറ്റെടുക്കുന്നില്ല.</string>
+    <string name="closed">അടച്ചു</string>
+    <string name="closes">അടയ്ക്കുന്നു</string>
+    <string name="name">NAME</string>
+    <string name="bank_name">ബാങ്കിന്റെ പേര്</string>
+    <string name="email_id">ഇ - മെയിൽ ഐഡി</string>
+    <string name="Suggestion">നിർദ്ദേശം</string>
+    <string name="mobile_number">മൊബൈൽ നമ്പർ</string>
+    <string name="send_suggestion">നിർദ്ദേശം അയയ്ക്കുക</string>
+    <string name="send_feedback">ഫീഡ്‌ബാക്ക് അയയ്‌ക്കുക</string>
+</resources>

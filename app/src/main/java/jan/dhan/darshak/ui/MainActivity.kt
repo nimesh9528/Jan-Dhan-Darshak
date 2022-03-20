@@ -1,6 +1,7 @@
 package jan.dhan.darshak.ui
 
 import android.Manifest
+import android.animation.Animator
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,9 +9,12 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Location
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
 import android.text.Editable
+import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -22,6 +26,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -38,6 +43,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
+import com.google.android.libraries.places.api.net.FetchPlaceResponse
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
@@ -56,7 +64,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback {
+
+class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnInitListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
     private lateinit var slidingRootNavBuilder: SlidingRootNav
@@ -132,6 +141,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             this@MainActivity
         )
 
+        textToSpeech = TextToSpeech(this@MainActivity, this@MainActivity)
+
         voiceResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
@@ -141,6 +152,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                     if (!spokenText.isNullOrEmpty()) {
                         binding.etSearch.setText(spokenText[0])
                         selectedMarker = null
+                    }
+                }
+            }
 
         placesAdapter = PlacesAdapter(this@MainActivity, placesList)
 
@@ -161,59 +175,106 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                 R.id.main -> {
                     selectedCategory = "atm"
                     selectedMarker = null
+                    clickedFromBottomNavigation = true
 
                     binding.etSearch.setText(R.string.atm)
-                    getNearbyPointsFromAPI(
-                        type = "atm",
-                        radius = 10000,
-                        rankBy = selectedFilter
-                    )
+                    if (selectedFilter == "openNow") {
+                        getNearbyPointsFromAPI(
+                            type = "atm",
+                            radius = 10000,
+                            openNow = "true"
+                        )
+                    } else {
+                        getNearbyPointsFromAPI(
+                            type = "atm",
+                            radius = if (selectedFilter == "distance") null else 10000,
+                            rankBy = selectedFilter
+                        )
+                    }
                 }
 
                 R.id.branch -> {
                     selectedCategory = "bank"
                     selectedMarker = null
+                    clickedFromBottomNavigation = true
 
                     binding.etSearch.setText(R.string.branch)
-                    getNearbyPointsFromAPI(
-                        type = "bank",
-                        radius = 10000,
-                        rankBy = selectedFilter
-                    )
+                    if (selectedFilter == "openNow") {
+                        getNearbyPointsFromAPI(
+                            type = "bank",
+                            radius = 10000,
+                            openNow = "true"
+                        )
+                    } else {
+                        getNearbyPointsFromAPI(
+                            type = "bank",
+                            radius = if (selectedFilter == "distance") null else 10000,
+                            rankBy = selectedFilter
+                        )
+                    }
                 }
 
                 R.id.post_office -> {
                     selectedCategory = "post_office"
                     selectedMarker = null
+                    clickedFromBottomNavigation = true
 
                     binding.etSearch.setText(R.string.post_office)
-                    getNearbyPointsFromAPI(
-                        type = "post_office",
-                        radius = 10000,
-                        rankBy = selectedFilter
-                    )
+                    if (selectedFilter == "openNow") {
+                        getNearbyPointsFromAPI(
+                            type = "post_office",
+                            radius = 10000,
+                            openNow = "true"
+                        )
+                    } else {
+                        getNearbyPointsFromAPI(
+                            type = "post_office",
+                            radius = if (selectedFilter == "distance") null else 10000,
+                            rankBy = selectedFilter
+                        )
+                    }
                 }
 
                 R.id.csc -> {
                     selectedCategory = "Jan Seva Kendra"
                     selectedMarker = null
+                    clickedFromBottomNavigation = true
 
                     binding.etSearch.setText(R.string.csc)
-                    getNearbyPointsFromAPI(
-                        keyword = "Jan Seva Kendra",
-                        rankBy = selectedFilter
-                    )
+                    if (selectedFilter == "openNow") {
+                        getNearbyPointsFromAPI(
+                            keyword = "csc",
+                            radius = if (selectedFilter == "distance") null else 10000,
+                            openNow = "true"
+                        )
+                    } else {
+                        getNearbyPointsFromAPI(
+                            keyword = "csc",
+                            radius = if (selectedFilter == "distance") null else 10000,
+                            rankBy = selectedFilter
+                        )
+                    }
                 }
 
                 R.id.bank_mitra -> {
                     selectedCategory = "Bank Mitra"
                     selectedMarker = null
+                    clickedFromBottomNavigation = true
 
                     binding.etSearch.setText(R.string.bank_mitra)
-                    getNearbyPointsFromAPI(
-                        keyword = "Bank Mitra",
-                        rankBy = selectedFilter
-                    )
+                    if (selectedFilter == "openNow") {
+                        getNearbyPointsFromAPI(
+                            keyword = "Bank Mitra",
+                            radius = if (selectedFilter == "distance") null else 10000,
+                            openNow = "true"
+                        )
+                    } else {
+                        getNearbyPointsFromAPI(
+                            keyword = "Bank Mitra",
+                            radius = if (selectedFilter == "distance") null else 10000,
+                            rankBy = selectedFilter
+                        )
+                    }
                 }
             }
             true
@@ -287,7 +348,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
             selectedFilter = "prominence"
-            val typeFilter: List<String> = listOf("atm", "branch", "bank mitra")
+            val typeFilter: List<String> = listOf("atm", "branch", "post office")
 
             if (typeFilter.contains(binding.etSearch.text.toString().lowercase())) {
                 getNearbyPointsFromAPI(
@@ -298,6 +359,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             } else {
                 getNearbyPointsFromAPI(
                     keyword = binding.etSearch.text.toString().lowercase(),
+                    radius = 10000,
+                    rankBy = selectedFilter
                 )
             }
         }
@@ -318,7 +381,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
             selectedFilter = "distance"
 
-            val typeFilter: List<String> = listOf("atm", "branch", "bank mitra")
+            val typeFilter: List<String> = listOf("atm", "branch", "post office")
 
             if (typeFilter.contains(binding.etSearch.text.toString().lowercase())) {
                 getNearbyPointsFromAPI(
@@ -349,7 +412,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
             selectedFilter = "openNow"
 
-            val typeFilter: List<String> = listOf("atm", "branch", "bank mitra")
+            val typeFilter: List<String> = listOf("atm", "branch", "post office")
 
             if (typeFilter.contains(binding.etSearch.text.toString().lowercase())) {
                 getNearbyPointsFromAPI(
@@ -360,7 +423,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             } else {
                 getNearbyPointsFromAPI(
                     keyword = binding.etSearch.text.toString().lowercase(),
-                    openNow = "true"
+                    openNow = "true",
+                    radius = 10000,
                 )
             }
         }
@@ -379,9 +443,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                     textView.setTextColor(resources.getColor(R.color.black, theme))
             }
 
-            selectedFilter = "topRated"
+            selectedFilter = "prominence"
 
-            val typeFilter: List<String> = listOf("atm", "branch", "bank mitra")
+            val typeFilter: List<String> = listOf("atm", "branch", "post office")
 
             if (typeFilter.contains(binding.etSearch.text.toString().lowercase())) {
                 getNearbyPointsFromAPI(
@@ -392,6 +456,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             } else {
                 getNearbyPointsFromAPI(
                     keyword = binding.etSearch.text.toString().lowercase(),
+                    radius = 10000,
+                    rankBy = selectedFilter
                 )
             }
         }
@@ -432,25 +498,33 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         })
 
         binding.etSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 when {
                     s.isNullOrEmpty() -> {
                         binding.ivSearchIcon.visibility = View.VISIBLE
                         binding.ivCloseIcon.visibility = View.GONE
-
-                        getNearbyPointsFromAPI(
-                            keyword = s.toString()
-                        )
                     }
                     else -> {
                         binding.ivSearchIcon.visibility = View.GONE
                         binding.ivCloseIcon.visibility = View.VISIBLE
+
+                        if (!clickedFromBottomNavigation) {
+                            if (selectedFilter == "openNow") {
+                                getNearbyPointsFromAPI(
+                                    keyword = s.toString().lowercase(),
+                                    radius = if (selectedFilter == "distance") null else 10000,
+                                    openNow = "true"
+                                )
+                            } else {
+                                getNearbyPointsFromAPI(
+                                    keyword = s.toString().lowercase(),
+                                    radius = if (selectedFilter == "distance") null else 10000,
+                                    rankBy = selectedFilter
+                                )
+                            }
+                        } else clickedFromBottomNavigation = false
                     }
                 }
             }
@@ -492,48 +566,58 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         slidingRootNavLayout.findViewById<TextView>(R.id.tvMissingBank)?.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Missing Bank", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
+
+            formFragment.arguments = bundleOf(
+                "heading" to getString(R.string.missing_bank),
+            )
+            formFragment.show(supportFragmentManager, "missing bank")
         }
 
         slidingRootNavLayout.findViewById<TextView>(R.id.tvFeedback)?.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Feedback", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
+
+            formFragment.arguments = bundleOf(
+                "heading" to getString(R.string.feedback)
+            )
+            formFragment.show(supportFragmentManager, "feedback")
         }
 
         slidingRootNavLayout.findViewById<TextView>(R.id.tvHelp)?.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Help", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
+
+            explanationFragment.arguments = bundleOf(
+                "heading" to getString(R.string.faq),
+                "description" to "Description",
+                "recyclerView" to true,
+            )
+            explanationFragment.show(supportFragmentManager, "Faq")
         }
 
         slidingRootNavLayout.findViewById<TextView>(R.id.tvAboutUs)?.setOnClickListener {
-            Toast.makeText(this@MainActivity, "About Us", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
+
+            explanationFragment.arguments = bundleOf(
+                "heading" to getString(R.string.about_us),
+                "description" to getString(R.string.about_us_text),
+                "recyclerView" to false,
+            )
+            explanationFragment.show(supportFragmentManager, "about_us")
         }
 
         slidingRootNavLayout.findViewById<TextView>(R.id.tvDisclaimer)?.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Disclaimer", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
+
+            explanationFragment.arguments = bundleOf(
+                "heading" to getString(R.string.disclaimer),
+                "description" to getString(R.string.disclaimer_text),
+                "recyclerView" to false,
+            )
+            explanationFragment.show(supportFragmentManager, "disclaimer")
         }
 
         slidingRootNavLayout.findViewById<ImageView>(R.id.ivCloseButton)?.setOnClickListener {
             slidingRootNavBuilder.closeMenu(true)
-        }
-
-        binding.ivPinnedDirectionIcon.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Directions", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.ivPinnedCallIcon.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Call", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.ivPinnedSaveIcon.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Save", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.ivPinnedSpeak.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Speak Out Load", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -571,6 +655,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 selectedMarker?.setIcon(bitmapFromVector(R.drawable.icon_marker_selected))
                 previousSelectedMarker = selectedMarker
+                fetchPinnedData(marker.snippet)
             }
             true
         }
@@ -584,11 +669,282 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             selectedMarkerLocation = currentLocation
             selectedMarker = null
             previousSelectedMarker = null
+            hideAndShowPinnedLocation()
         }
 
         getLocationPermission()
         updateLocationUI()
         getDeviceLocation()
+    }
+
+    private fun fetchPinnedData(pinnedId: String?) {
+        hideShowProgressBar(showProgressbar = true)
+
+        val placeFields = listOf(
+            Place.Field.NAME,
+            Place.Field.ADDRESS,
+            Place.Field.RATING,
+            Place.Field.PHONE_NUMBER,
+            Place.Field.USER_RATINGS_TOTAL,
+            Place.Field.OPENING_HOURS,
+            Place.Field.UTC_OFFSET
+        )
+        val request = FetchPlaceRequest.newInstance(pinnedId!!, placeFields)
+
+        placesClient.fetchPlace(request)
+            .addOnSuccessListener { response: FetchPlaceResponse ->
+                val place = response.place
+                binding.tvPinnedHeading.text = place.name?.toString()
+                binding.tvPinnedAddress.text = place.address?.toString()
+                binding.rbPinnedRatings.rating = place.rating?.toString()?.toFloat() ?: 0F
+
+                val userRatingCount =
+                    if (place.userRatingsTotal?.toString() == "null") "" else "(${place.userRatingsTotal?.toString()})"
+                binding.tvPinnedRatingCount.text = userRatingCount
+
+                val open = if (place.isOpen == true)
+                    "<font color=\"${
+                        resources.getColor(R.color.green_color, theme)
+                    }\">${resources.getString(R.string.open_now)}</font>"
+                else
+                    "<font color=\"${
+                        resources.getColor(R.color.navigationSelected, theme)
+                    }\">${resources.getString(R.string.closed)}</font>"
+
+                val compatOpen =
+                    if (place.isOpen == true) resources.getString(R.string.open_now) else resources.getString(
+                        R.string.closed
+                    )
+
+                var close = ""
+                val closesTimings =
+                    place.openingHours?.periods?.get(0)?.close?.time?.hours.toString()
+                if (closesTimings.isNotEmpty() && closesTimings != "null") {
+                    close = if (closesTimings.toInt() > 12)
+                        "· ${resources.getString(R.string.closes)} ${closesTimings.toInt() % 12} PM"
+                    else
+                        "· ${resources.getString(R.string.closes)} ${closesTimings.toInt() % 12} AM"
+                }
+
+                val timings = "$open $close"
+                val compatTimings = "$compatOpen $close"
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    binding.tvPinnedTimings.setText(
+                        Html.fromHtml(timings, HtmlCompat.FROM_HTML_MODE_LEGACY),
+                        TextView.BufferType.SPANNABLE
+                    )
+                } else {
+                    binding.tvPinnedTimings.text = compatTimings
+                }
+
+                binding.ivPinnedDirectionIcon.setOnClickListener {
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("google.navigation:q=${selectedMarkerLocation?.latitude},${selectedMarkerLocation?.longitude}")
+                    ).also {
+                        it.`package` = "com.google.android.apps.maps"
+                        if (it.resolveActivity(packageManager) != null)
+                            startActivity(it)
+                    }
+                }
+
+                binding.ivPinnedCallIcon.setOnClickListener {
+                    if (!place.phoneNumber?.toString().isNullOrEmpty())
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_DIAL,
+                                Uri.parse("tel:${place.phoneNumber?.toString()}")
+                            )
+                        )
+                    else
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Phone number not Provided.",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                }
+
+                binding.ivPinnedSaveIcon.setOnClickListener {
+                    Toast.makeText(this@MainActivity, "Save", Toast.LENGTH_SHORT).show()
+                }
+
+                binding.ivPinnedSpeak.setOnClickListener {
+                    sayOutLoud("${binding.tvPinnedHeading.text}")
+                }
+
+                hideAndShowPinnedLocation()
+                hideShowProgressBar(showProgressbar = false)
+
+            }.addOnFailureListener {
+                hideShowProgressBar(showProgressbar = false)
+            }
+    }
+
+    private fun hideAndShowPinnedLocation() {
+        if (selectedMarker != null) {
+            binding.mcvPinnedContainer.visibility = View.VISIBLE
+
+            binding.bottomNavigation
+                .animate()
+                .alpha(0.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.bottomNavigation.visibility = View.GONE
+                    }
+                })
+
+            binding.mcvBottomSheetContainer
+                .animate()
+                .alpha(0.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvBottomSheetContainer.visibility = View.GONE
+                    }
+                })
+
+            binding.mcvCurrentContainer
+                .animate()
+                .alpha(0.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvCurrentContainer.visibility = View.GONE
+                    }
+                })
+
+            binding.mcvDirectionContainer
+                .animate()
+                .alpha(0.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvDirectionContainer.visibility = View.GONE
+                    }
+                })
+
+            binding.mcvLayerContainer
+                .animate()
+                .alpha(0.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvLayerContainer.visibility = View.GONE
+                    }
+                })
+
+            binding.mcvNorthFacingContainer
+                .animate()
+                .alpha(0.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvNorthFacingContainer.visibility = View.GONE
+                    }
+                })
+
+        } else {
+            binding.mcvPinnedContainer.visibility = View.GONE
+
+            binding.bottomNavigation
+                .animate()
+                .alpha(1.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.bottomNavigation.visibility = View.VISIBLE
+                    }
+                })
+
+            binding.mcvBottomSheetContainer
+                .animate()
+                .alpha(1.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvBottomSheetContainer.visibility = View.VISIBLE
+                    }
+                })
+
+            binding.mcvCurrentContainer
+                .animate()
+                .alpha(1.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvCurrentContainer.visibility = View.VISIBLE
+                    }
+                })
+
+            binding.mcvDirectionContainer
+                .animate()
+                .alpha(1.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvDirectionContainer.visibility = View.VISIBLE
+                    }
+                })
+
+            binding.mcvLayerContainer
+                .animate()
+                .alpha(1.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvLayerContainer.visibility = View.VISIBLE
+                    }
+                })
+
+            binding.mcvNorthFacingContainer
+                .animate()
+                .alpha(1.0F)
+                .setDuration(500)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationEnd(animation: Animator?) {
+                        binding.mcvNorthFacingContainer.visibility = View.VISIBLE
+                    }
+                })
+        }
     }
 
     private fun updateLocationUI() {
@@ -661,11 +1017,19 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                                     textView.setTextColor(resources.getColor(R.color.black, theme))
                             }
 
-                            getNearbyPointsFromAPI(
-                                type = selectedCategory,
-                                radius = 10000,
-                                rankBy = selectedFilter
-                            )
+                            if (selectedFilter == "openNow") {
+                                getNearbyPointsFromAPI(
+                                    type = selectedCategory,
+                                    radius = if (selectedFilter == "distance") null else 10000,
+                                    openNow = "true"
+                                )
+                            } else {
+                                getNearbyPointsFromAPI(
+                                    type = selectedCategory,
+                                    radius = if (selectedFilter == "distance") null else 10000,
+                                    rankBy = selectedFilter
+                                )
+                            }
                         }
                     } else {
                         mGoogleMap.animateCamera(
@@ -699,6 +1063,22 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         language: String = currentLanguage,
         api: String = apiKey
     ) {
+        hideShowProgressBar(showProgressbar = true)
+        mGoogleMap.clear()
+        placesList.clear()
+        previousSelectedMarker = null
+
+        placesAdapter.removeAll()
+
+        if (placesList.size > 0) {
+            binding.rvLocationList.visibility = View.VISIBLE
+            binding.ivNoDataIcon.visibility = View.GONE
+        } else {
+            binding.rvLocationList.visibility = View.GONE
+            binding.ivNoDataIcon.visibility = View.VISIBLE
+        }
+
+
         val request = GooglePlaces.buildService(Api::class.java)
         val call = request.getPlaces(
             keyword = keyword,
@@ -716,88 +1096,133 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>?, response: Response<String>?) {
                 if (response != null) {
-                    showOnMap(parseJSON(response.body()))
+                    showOnMap(response.body())
                 }
             }
 
-            override fun onFailure(call: Call<String>?, t: Throwable?) {}
+            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                hideShowProgressBar(showProgressbar = false)
+            }
         })
     }
 
-    fun parseJSON(data: String?): ArrayList<HashMap<String?, String?>?> {
-        val places: ArrayList<HashMap<String?, String?>?> = arrayListOf()
+    fun showOnMap(data: String?) {
         var array: JSONArray? = null
         val single: JSONObject
         try {
             single = JSONObject(data!!)
             array = single.getJSONArray("results")
         } catch (e: JSONException) {
+            hideShowProgressBar(showProgressbar = false)
             e.printStackTrace()
         }
 
         (0 until array?.length()!!).forEach { i ->
+            val map = HashMap<String?, String?>()
+
             try {
-                places.add(singlePlace(array[i] as JSONObject))
+                val json = array[i] as JSONObject
+                map["id"] = json.getString("place_id")
+
+                val placeFields = listOf(
+                    Place.Field.OPENING_HOURS,
+                    Place.Field.UTC_OFFSET,
+                    Place.Field.PHONE_NUMBER,
+                    Place.Field.WEBSITE_URI
+                )
+                val request = FetchPlaceRequest.newInstance(map["id"].toString(), placeFields)
+
+                placesClient.fetchPlace(request)
+                    .addOnSuccessListener { response: FetchPlaceResponse ->
+                        val place = response.place
+                        map["name"] = if (!json.isNull("name")) json.getString("name") else ""
+                        map["address"] =
+                            if (!json.isNull("vicinity")) json.getString("vicinity") else ""
+                        map["latitude"] = json.getJSONObject("geometry").getJSONObject("location")
+                            .getString("lat")
+                        map["longitude"] = json.getJSONObject("geometry").getJSONObject("location")
+                            .getString("lng")
+                        map["rating"] =
+                            if (!json.isNull("rating")) json.getString("rating") else "0"
+                        map["ratingCount"] =
+                            if (!json.isNull("user_ratings_total")) json.getString("user_ratings_total") else "0"
+                        map["open"] = if (!place.isOpen?.toString()
+                                .isNullOrEmpty()
+                        ) place.isOpen?.toString() else "false"
+
+                        val closesTimings =
+                            place.openingHours?.periods?.get(0)?.close?.time?.hours.toString()
+                        if (closesTimings.isNotEmpty() && closesTimings != "null") {
+                            if (closesTimings.toInt() > 12)
+                                map["close"] =
+                                    "· ${resources.getString(R.string.closes)} ${closesTimings.toInt() % 12} PM"
+                            else
+                                map["close"] =
+                                    "· ${resources.getString(R.string.closes)} ${closesTimings.toInt() % 12} AM"
+                        } else {
+                            map["close"] = ""
+                        }
+                        map["phoneNumber"] = if (!place.phoneNumber?.toString()
+                                .isNullOrEmpty()
+                        ) place.phoneNumber?.toString() else ""
+                        map["website"] = if (!place.websiteUri?.toString()
+                                .isNullOrEmpty()
+                        ) place.websiteUri?.toString() else ""
+
+                        placesList.add(map)
+
+                        placesAdapter.updateList(currentLocation, placesList.size - 1)
+
+                        if (placesList.size > 0) {
+                            binding.rvLocationList.visibility = View.VISIBLE
+                            binding.ivNoDataIcon.visibility = View.GONE
+                        } else {
+                            binding.rvLocationList.visibility = View.GONE
+                            binding.ivNoDataIcon.visibility = View.VISIBLE
+                        }
+
+                        val markerOptions = MarkerOptions()
+                        markerOptions.position(
+                            LatLng(
+                                map["latitude"]!!.toDouble(),
+                                map["longitude"]!!.toDouble()
+                            )
+                        )
+                        markerOptions.title(map["name"])
+                        markerOptions.snippet(map["id"])
+                        markerOptions.icon(bitmapFromVector(R.drawable.icon_marker))
+                        val marker = mGoogleMap.addMarker(markerOptions)
+
+                        if (!map["open"].isNullOrEmpty()) {
+                            marker?.tag = map["open"] + " " + map["id"]
+                        }
+                    }.addOnFailureListener {
+                        hideShowProgressBar(showProgressbar = false)
+                    }
             } catch (e: JSONException) {
+                hideShowProgressBar(showProgressbar = false)
                 e.printStackTrace()
             }
         }
-        return places
-    }
-
-    private fun singlePlace(json: JSONObject): HashMap<String?, String?> {
-        val map = HashMap<String?, String?>()
-        try {
-            map["place_id"] = json.getString("place_id")
-            map["user_ratings_total"] = json.getString("user_ratings_total")
-            map["rating"] = if (!json.isNull("rating")) json.getString("rating") else "0"
-            map["place_name"] = if (!json.isNull("name")) json.getString("name") else ""
-            map["vicinity"] = if (!json.isNull("vicinity")) json.getString("vicinity") else ""
-            map["lat"] = json.getJSONObject("geometry").getJSONObject("location").getString("lat")
-            map["lng"] = json.getJSONObject("geometry").getJSONObject("location").getString("lng")
-            map["isOpen"] =
-                if (!json.isNull("opening_hours") && json.isNull("opening_hours").toString()
-                        .isNotEmpty()
-                ) json.getJSONObject("opening_hours").getString("open_now") else "unknown"
-
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        return map
-    }
-
-    private fun showOnMap(
-        places: ArrayList<HashMap<String?, String?>?>,
-    ) {
-        try {
-            mGoogleMap.clear()
-            placesList = places
-            for (i in places.indices) {
-                val markerOptions = MarkerOptions()
-                val googlePlace = places[i]
-                markerOptions.position(
-                    LatLng(
-                        googlePlace?.get("lat")!!.toDouble(),
-                        googlePlace["lng"]!!.toDouble()
-                    )
-                )
-                markerOptions.title(googlePlace["place_name"])
-                markerOptions.snippet(googlePlace["vicinity"])
-                markerOptions.icon(bitmapFromVector(R.drawable.icon_marker))
-                val marker = mGoogleMap.addMarker(markerOptions)
-
-                if (!googlePlace["isOpen"].isNullOrEmpty()) {
-                    marker?.tag = googlePlace["isOpen"] + " " + googlePlace["place_id"]
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
         mGoogleMap.addMarker(
             MarkerOptions().position(currentLocation).title("Current Location")
                 .icon(bitmapFromVector(R.drawable.icon_current_location))
         )
+        hideShowProgressBar(showProgressbar = false)
+    }
+
+    fun zoomToCurrentSelectedPlace(location: LatLng) {
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 20F))
+    }
+
+    fun hideShowProgressBar(showProgressbar: Boolean) {
+        if (showProgressbar) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.ivMenu.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.ivMenu.visibility = View.VISIBLE
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -817,5 +1242,23 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
         updateLocationUI()
+    }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            textToSpeech!!.language = Locale.getDefault()
+        }
+    }
+
+    fun sayOutLoud(message: String) {
+        textToSpeech!!.speak(message, TextToSpeech.QUEUE_FLUSH, null, "")
+    }
+
+    override fun onDestroy() {
+        if (textToSpeech != null) {
+            textToSpeech!!.stop()
+            textToSpeech!!.shutdown()
+        }
+        super.onDestroy()
     }
 }

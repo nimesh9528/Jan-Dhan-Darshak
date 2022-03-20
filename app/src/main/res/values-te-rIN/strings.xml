@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">జన్ ధన్ దర్శక్</string>
+    <string name="atm">ATM</string>
+    <string name="branch">శాఖ</string>
+    <string name="post_office">తపాలా కార్యాలయము</string>
+    <string name="csc">CSC</string>
+    <string name="bank_mitra">బ్యాంక్ మిత్ర</string>
+    <string name="jan_dhan_darshak">జన్ ధన్\nదర్శక్</string>
+    <string name="search_here">ఇక్కడ వెతకండి</string>
+    <string name="distance">దూరం</string>
+    <string name="relevance">ఔచిత్యం</string>
+    <string name="open_now">ఇప్పుడు తెరవండి</string>
+    <string name="top_rated">టాప్ రేటింగ్</string>
+    <string name="map_type">మ్యాప్ రకం</string>
+    <string name="default_map_type">డిఫాల్ట్</string>
+    <string name="satellite_map_type">ఉపగ్రహ</string>
+    <string name="terrain_map_type">భూభాగం</string>
+    <string name="favourite_locations">ఇష్టమైన స్థానాలు</string>
+    <string name="missing_bank">బ్యాంకు లేదు</string>
+    <string name="feedback">అభిప్రాయం</string>
+    <string name="faq">ఎఫ్ ఎ క్యూ</string>
+    <string name="about_us">మా గురించి</string>
+    <string name="disclaimer">నిరాకరణ</string>
+    <string name="version">వెర్షన్: 1.0.0</string>
+    <string name="about_us_text">జన్ ధన్ దర్శక్ మొబైల్ అప్లికేషన్ భారతదేశంలోని బ్యాంక్ శాఖలు, ATMలు, బ్యాంక్ మిత్ర స్థానాలతో కూడిన బ్యాంకింగ్ మౌలిక సదుపాయాలను వీక్షించడానికి పౌరులకు ఇంటర్‌ఫేస్‌ను అందిస్తుంది. ప్రభుత్వ మరియు ప్రైవేట్ రంగానికి చెందిన షెడ్యూల్ కమర్షియల్ బ్యాంక్‌ల నుండి డిపార్ట్‌మెంట్ ఆఫ్ ఫైనాన్షియల్ సర్వీసెస్ ద్వారా డేటా క్రోడీకరించబడింది.</string>
+    <string name="disclaimer_text">మొబైల్ అప్లికేషన్‌లో ఉన్న సమాచారం వివిధ షెడ్యూల్డ్ వాణిజ్య బ్యాంకుల ద్వారా అందించబడుతుంది మరియు నిర్వహించబడుతుంది. ఏదైనా డేటా యొక్క ఖచ్చితత్వం లేదా కరెన్సీకి సంబంధించి ఎటువంటి హామీ ఇవ్వబడదు. అందువల్ల, ఏదైనా ప్రత్యేక, పరోక్ష లేదా పర్యవసానమైన నష్టాలకు లేదా పరిచయం, నిర్లక్ష్యం లేదా ఇతర చర్య వల్ల ఉపయోగం, డేటా లేదా లాభాలను కోల్పోవడం వల్ల ఏర్పడే ఏదైనా నష్టాలకు ఆర్థిక సేవల విభాగం లేదా దాని భాగాలు ఏ సందర్భంలోనూ బాధ్యత వహించవు. , ఇక్కడ అందించిన సమాచారం యొక్క ఉపయోగం నుండి లేదా దానితో సంబంధం కలిగి ఉంటుంది. వెబ్‌సైట్ బ్యాంకింగ్ ఇన్‌ఫ్రాస్ట్రక్చర్‌కి ద్వితీయ ప్రాతినిధ్యంగా ఉపయోగపడేలా రూపొందించబడింది మరియు ఈ పబ్లిక్ సమాచారం కోసం ప్రాథమిక వనరులు అయిన షెడ్యూల్డ్ వాణిజ్య బ్యాంకుల నుండి కట్టుబడి ఉంటుంది. ఈ వెబ్‌సైట్ యొక్క వినియోగదారులు ఇక్కడ అందించిన సమాచారం యొక్క ధృవీకరణ కోసం ఈ ప్రాథమిక వనరులను సంప్రదించాలని దీని ద్వారా తెలియజేయబడుతోంది. మరియు డిపార్ట్‌మెంట్ ఆఫ్ ఫైనాన్షియల్ సర్వీసెస్ లేదా దాని భాగాలు మరియు సాఫ్ట్‌వేర్ డెవలపర్, NIC, ఈ వెబ్‌సైట్‌లోని సమాచారానికి చట్టపరమైన బాధ్యత వహించదు.</string>
+    <string name="closed">మూసివేయబడింది</string>
+    <string name="closes">మూసివేస్తుంది</string>
+    <string name="name">NAME</string>
+    <string name="bank_name">బ్యాంక్ పేరు</string>
+    <string name="email_id">ఇమెయిల్ ID</string>
+    <string name="Suggestion">సూచన</string>
+    <string name="mobile_number">మొబైల్ నంబర్</string>
+    <string name="send_suggestion">సూచనను పంపండి</string>
+    <string name="send_feedback">అభిప్రాయాన్ని పంపండి</string>
+</resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">جن دھن درشک</string>
+    <string name="atm">اے ٹی ایم</string>
+    <string name="branch">شاخ</string>
+    <string name="post_office">ڈاک خانہ</string>
+    <string name="csc">سی ایس سی</string>
+    <string name="bank_mitra">بینک مترا</string>
+    <string name="jan_dhan_darshak">جن دھن\nدرشک</string>
+    <string name="search_here">یہاں تلاش کریں۔</string>
+    <string name="distance">فاصلے</string>
+    <string name="relevance">مطابقت</string>
+    <string name="open_now">اب کھولیں۔</string>
+    <string name="top_rated">سب سے اوپر ریٹیڈ</string>
+    <string name="map_type">نقشہ کی قسم</string>
+    <string name="default_map_type">طے شدہ</string>
+    <string name="satellite_map_type">سیٹلائٹ</string>
+    <string name="terrain_map_type">خطہ</string>
+    <string name="favourite_locations">پسندیدہ مقامات</string>
+    <string name="missing_bank">غائب بینک</string>
+    <string name="feedback">تاثرات</string>
+    <string name="faq">عمومی سوالات</string>
+    <string name="about_us">ہمارے بارے میں</string>
+    <string name="disclaimer">ڈس کلیمر</string>
+    <string name="version">ورژن: 1.0.0</string>
+    <string name="about_us_text">جن دھن درشک موبائل ایپلیکیشن شہریوں کو ہندوستان میں بینکنگ کے بنیادی ڈھانچے کو دیکھنے کے لیے ایک انٹرفیس فراہم کرتی ہے جس میں بینک کی شاخیں، اے ٹی ایم، بینک دوستا کے مقامات شامل ہیں۔ اعداد و شمار سرکاری اور نجی دونوں شعبوں کے شیڈول کمرشل بینکوں کے محکمہ مالیاتی خدمات کے ذریعہ جمع کیے گئے ہیں۔</string>
+    <string name="disclaimer_text">موبائل ایپلیکیشن میں موجود معلومات مختلف شیڈولڈ کمرشل بینکوں کے ذریعہ فراہم کی جاتی ہیں اور ان کی دیکھ بھال کی جاتی ہے۔ کسی بھی ڈیٹا کی درستگی یا کرنسی کے بارے میں کوئی گارنٹی نہیں دی گئی ہے۔ اس لیے، کسی بھی صورت میں محکمہ مالیاتی خدمات یا اس کے اجزاء کسی خاص، بالواسطہ یا نتیجہ خیز نقصانات یا کسی بھی نقصان کے لیے ذمہ دار نہیں ہوں گے جو استعمال، ڈیٹا، یا منافع کے نقصان کے نتیجے میں ہوں، چاہے وہ رابطے، غفلت، یا دیگر کارروائی میں ہو۔ ، یہاں فراہم کردہ معلومات کے استعمال سے پیدا ہونے والی یا اس کے سلسلے میں۔ ویب سائٹ کو بینکنگ انفراسٹرکچر کی ثانوی نمائندگی کے طور پر ڈیزائن کیا گیا ہے، اور اس کی تعمیل طے شدہ کمرشل بینکوں سے کی گئی ہے جو اس عوامی معلومات کے بنیادی ذرائع ہیں۔ اس ویب سائٹ کے صارفین کو مطلع کیا جاتا ہے کہ یہاں پیش کی گئی معلومات کی تصدیق کے لیے ان بنیادی ذرائع سے رجوع کیا جانا چاہیے۔ اور محکمہ مالیاتی خدمات یا اس کے اجزاء اور سافٹ ویئر ڈویلپر، NIC، اس ویب سائٹ پر موجود معلومات کی کوئی قانونی ذمہ داری قبول نہیں کرتے ہیں۔</string>
+    <string name="closed">بند</string>
+    <string name="closes">بند کرتا ہے۔</string>
+    <string name="name">NAME</string>
+    <string name="bank_name">بینک کا نام</string>
+    <string name="email_id">ای میل کا پتہ</string>
+    <string name="Suggestion">مشورہ</string>
+    <string name="mobile_number">موبائل فون کانمبر</string>
+    <string name="send_suggestion">تجویز بھیجیں۔</string>
+    <string name="send_feedback">رائے بھیجیں</string>
+</resources>
