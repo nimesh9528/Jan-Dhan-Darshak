@@ -1,4 +1,4 @@
-package jan.dhan.darshak.ui
+package jan.dhan.darshak.ui.activity
 
 import android.Manifest
 import android.animation.Animator
@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -23,6 +22,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -51,11 +51,15 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
+import dagger.hilt.android.AndroidEntryPoint
 import jan.dhan.darshak.R
 import jan.dhan.darshak.adapter.PlacesAdapter
-import jan.dhan.darshak.api.Api
-import jan.dhan.darshak.api.GooglePlaces
 import jan.dhan.darshak.databinding.ActivityMainBinding
+import jan.dhan.darshak.data.Location
+import jan.dhan.darshak.data.NearbyPointsApi
+import jan.dhan.darshak.ui.viewmodels.MainViewModel
+import jan.dhan.darshak.ui.fragments.ExplanationFragment
+import jan.dhan.darshak.ui.fragments.FormFragment
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -63,8 +67,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import javax.inject.Inject
+import android.location.Location as Locals
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnInitListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
@@ -79,7 +85,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
     private lateinit var voiceResult: ActivityResultLauncher<Intent>
     private lateinit var placesClient: PlacesClient
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var lastKnownLocation: Location? = null
+    private var lastKnownLocation: Locals? = null
     private var lastCameraPosition: CameraPosition? = null
     private var locationPermissionGranted = false
     private lateinit var apiKey: String
@@ -92,6 +98,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
     private var textToSpeech: TextToSpeech? = null
     private val explanationFragment = ExplanationFragment()
     private val formFragment = FormFragment()
+    private val mainViewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var googlePlaces: NearbyPointsApi
 
     companion object {
         private const val DEFAULT_ZOOM = 14F
@@ -156,7 +166,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
                 }
             }
 
-        placesAdapter = PlacesAdapter(this@MainActivity, placesList)
+        placesAdapter = PlacesAdapter(this@MainActivity, placesList) { location ->
+            mainViewModel.insertLocation(location)
+        }
 
         binding.rvLocationList.also {
             it.layoutManager =
@@ -561,8 +573,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
         }
 
         slidingRootNavLayout.findViewById<TextView>(R.id.tvFavouriteLocation)?.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Favourites", Toast.LENGTH_SHORT).show()
             slidingRootNavBuilder.closeMenu(true)
+
+            explanationFragment.arguments = bundleOf(
+                "heading" to getString(R.string.favourite_locations),
+                "description" to "Description",
+                "recyclerView" to true,
+            )
+            explanationFragment.show(supportFragmentManager, "favourite locations")
         }
 
         slidingRootNavLayout.findViewById<TextView>(R.id.tvMissingBank)?.setOnClickListener {
@@ -614,6 +632,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
                 "recyclerView" to false,
             )
             explanationFragment.show(supportFragmentManager, "disclaimer")
+        }
+
+        slidingRootNavLayout.findViewById<TextView>(R.id.tvChangeLanguage)?.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Language Clicked", Toast.LENGTH_SHORT).show()
         }
 
         slidingRootNavLayout.findViewById<ImageView>(R.id.ivCloseButton)?.setOnClickListener {
@@ -687,7 +709,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
             Place.Field.PHONE_NUMBER,
             Place.Field.USER_RATINGS_TOTAL,
             Place.Field.OPENING_HOURS,
-            Place.Field.UTC_OFFSET
+            Place.Field.UTC_OFFSET,
+            Place.Field.WEBSITE_URI
         )
         val request = FetchPlaceRequest.newInstance(pinnedId!!, placeFields)
 
@@ -767,7 +790,23 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
                 }
 
                 binding.ivPinnedSaveIcon.setOnClickListener {
-                    Toast.makeText(this@MainActivity, "Save", Toast.LENGTH_SHORT).show()
+                    mainViewModel.insertLocation(
+                        Location(
+                            id = pinnedId,
+                            name = place.name,
+                            address = place.address,
+                            latitude = selectedMarkerLocation?.latitude.toString(),
+                            longitude = selectedMarkerLocation?.longitude.toString(),
+                            open = place.isOpen?.toString(),
+                            close = close,
+                            rating = place.rating?.toString(),
+                            ratingCount = place.userRatingsTotal?.toString(),
+                            phoneNumber = place.phoneNumber?.toString(),
+                            website = place.websiteUri?.toString(),
+                            timeStamp = System.currentTimeMillis()
+                        )
+                    )
+                    Toast.makeText(this@MainActivity, "Saved", Toast.LENGTH_SHORT).show()
                 }
 
                 binding.ivPinnedSpeak.setOnClickListener {
@@ -1079,8 +1118,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
         }
 
 
-        val request = GooglePlaces.buildService(Api::class.java)
-        val call = request.getPlaces(
+        val call = googlePlaces.getPlaces(
             keyword = keyword,
             openNow = openNow,
             type = type,
@@ -1102,6 +1140,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
 
             override fun onFailure(call: Call<String>?, t: Throwable?) {
                 hideShowProgressBar(showProgressbar = false)
+                Log.d("ADITYA", "FAIL 1: $t")
             }
         })
     }

@@ -34,4 +34,5 @@
     <string name="mobile_number">ಮೊಬೈಲ್ ನಂಬರ</string>
     <string name="send_suggestion">ಸಲಹೆಯನ್ನು ಕಳುಹಿಸಿ</string>
     <string name="send_feedback">ಪ್ರತಿಕ್ರಿಯೆ ಕಳುಹಿಸಿ</string>
+    <string name="change_language">ಭಾಷೆ ಬದಲಿಸಿ</string>
 </resources>

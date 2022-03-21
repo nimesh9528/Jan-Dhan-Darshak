@@ -34,4 +34,5 @@
     <string name="mobile_number">मोबाईल नंबर</string>
     <string name="send_suggestion">सूचना पाठवा</string>
     <string name="send_feedback">अभिप्राय पाठवा</string>
+    <string name="change_language">भाषा बदला</string>
 </resources>

@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import jan.dhan.darshak.R
-import jan.dhan.darshak.modals.Faq
+import jan.dhan.darshak.data.Faq
 
 
 class FaqAdapter(

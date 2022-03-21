@@ -1,10 +1,10 @@
-package jan.dhan.darshak.api
+package jan.dhan.darshak.data
 
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface Api {
+interface NearbyPointsApi {
     @GET("nearbysearch/json?")
     fun getPlaces(
         @Query("location") location: String?,

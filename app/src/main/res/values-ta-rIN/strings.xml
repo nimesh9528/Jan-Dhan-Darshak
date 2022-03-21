@@ -34,4 +34,5 @@
     <string name="mobile_number">கைபேசி எண்</string>
     <string name="send_suggestion">பரிந்துரையை அனுப்பவும்</string>
     <string name="send_feedback">கருத்தினை அனுப்பவும்</string>
+    <string name="change_language">மொழியை மாற்றவும்</string>
 </resources>

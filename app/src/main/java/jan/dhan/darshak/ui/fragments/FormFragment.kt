@@ -1,4 +1,4 @@
-package jan.dhan.darshak.ui
+package jan.dhan.darshak.ui.fragments
 
 import android.app.Dialog
 import android.os.Bundle

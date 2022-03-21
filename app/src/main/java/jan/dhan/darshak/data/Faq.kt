@@ -1,4 +1,4 @@
-package jan.dhan.darshak.modals
+package jan.dhan.darshak.data
 
 data class Faq(
     val number: String,

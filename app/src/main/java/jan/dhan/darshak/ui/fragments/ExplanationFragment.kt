@@ -1,22 +1,27 @@
-package jan.dhan.darshak.ui
+package jan.dhan.darshak.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import jan.dhan.darshak.R
 import jan.dhan.darshak.adapter.FaqAdapter
+import jan.dhan.darshak.adapter.FavouriteAdapter
+import jan.dhan.darshak.data.Faq
 import jan.dhan.darshak.databinding.ExplanationSheetsBinding
-import jan.dhan.darshak.modals.Faq
+import jan.dhan.darshak.ui.viewmodels.MainViewModel
 
 
 class ExplanationFragment : BottomSheetDialogFragment() {
 
     private var _binding: ExplanationSheetsBinding? = null
     private val binding get() = _binding!!
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +45,7 @@ class ExplanationFragment : BottomSheetDialogFragment() {
         binding.tvDescription.text = description
         binding.tvDescription.visibility = if (recyclerView) View.GONE else View.VISIBLE
 
-        if (recyclerView) {
+        if (recyclerView && heading == getString(R.string.faq)) {
             val faqList = arrayListOf(
                 Faq(
                     number = "1",
@@ -93,6 +98,29 @@ class ExplanationFragment : BottomSheetDialogFragment() {
                 it.addItemDecoration(
                     DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
                 )
+            }
+        } else if (recyclerView && heading == getString(R.string.favourite_locations)) {
+            val favouriteAdapter = FavouriteAdapter(arrayListOf())
+
+            binding.rvFaqs.also {
+                it.layoutManager =
+                    LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                it.adapter = favouriteAdapter
+                it.addItemDecoration(
+                    DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+                )
+            }
+
+            mainViewModel.allLocation.observe(this) { locations ->
+                if (locations.isEmpty()) {
+                    binding.ivNoDataIcon.visibility = View.VISIBLE
+                    binding.rvFaqs.visibility = View.GONE
+                } else {
+                    binding.ivNoDataIcon.visibility = View.GONE
+                    binding.rvFaqs.visibility = View.VISIBLE
+                }
+
+                favouriteAdapter.updateList(locations)
             }
         }
 

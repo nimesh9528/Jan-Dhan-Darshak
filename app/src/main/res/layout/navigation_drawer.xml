@@ -44,7 +44,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="60dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline1"
@@ -74,7 +74,7 @@
             android:id="@+id/tvMissingBank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="24dp"
             android:drawablePadding="24dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/missing_bank"
@@ -95,7 +95,7 @@
             android:id="@+id/tvFeedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="24dp"
             android:drawablePadding="24dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/feedback"
@@ -116,7 +116,7 @@
             android:id="@+id/tvHelp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="24dp"
             android:drawablePadding="24dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/faq"
@@ -137,7 +137,7 @@
             android:id="@+id/tvAboutUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="24dp"
             android:drawablePadding="24dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/about_us"
@@ -158,7 +158,7 @@
             android:id="@+id/tvDisclaimer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="24dp"
             android:drawablePadding="24dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/disclaimer"
@@ -167,6 +167,27 @@
             android:textSize="16sp"
             android:textStyle="normal"
             app:drawableLeftCompat="@drawable/icon_disclaimer" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="9dp"
+            android:background="@color/divider_color" />
+
+        <TextView
+            android:id="@+id/tvChangeLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:drawablePadding="24dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="@string/change_language"
+            android:textAlignment="viewStart"
+            android:textColor="@color/hint_text_color"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:drawableLeftCompat="@drawable/icon_language" />
 
         <View
             android:layout_width="match_parent"

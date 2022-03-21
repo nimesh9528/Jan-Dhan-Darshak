@@ -1,6 +1,5 @@
 package jan.dhan.darshak.adapter
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -17,20 +16,15 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import jan.dhan.darshak.R
-import jan.dhan.darshak.adapter.PlacesAdapter.PlacesViewHolder
 import jan.dhan.darshak.data.Location
 import jan.dhan.darshak.ui.activity.MainActivity
 
 
-class PlacesAdapter(
-    private val mContext: Context,
-    private val places: ArrayList<HashMap<String?, String?>?>,
-    private var itemClickListener: ((location: Location) -> Unit)? = null
-) : RecyclerView.Adapter<PlacesViewHolder>() {
+class FavouriteAdapter(
+    private var places: ArrayList<Location>,
+) : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHolder>() {
 
-    var currentLocation: LatLng? = null
-
-    inner class PlacesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class FavouriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val clSinglePlace: ConstraintLayout = itemView.findViewById(R.id.clSinglePlace)
         val tvResultHeading: TextView = itemView.findViewById(R.id.tvResultHeading)
         val tvAddress: TextView = itemView.findViewById(R.id.tvAddress)
@@ -44,46 +38,47 @@ class PlacesAdapter(
         val tvRatingCount: TextView = itemView.findViewById(R.id.tvRatingCount)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlacesViewHolder {
-        return PlacesViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
+        return FavouriteViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.single_location, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: PlacesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavouriteViewHolder, position: Int) {
         val place = places[position]
-        val heading = place?.get("name")
-        val address = place?.get("address")
-        val latitude = place?.get("latitude")?.toDouble()
-        val longitude = place?.get("longitude")?.toDouble()
-        val rating = place?.get("rating")
-        val ratingCount = "(${place?.get("ratingCount")})"
-        val open = if (place?.get("open").toBoolean())
+        val heading = place.name
+        val address = place.address
+        val latitude = place.latitude?.toDouble()
+        val longitude = place.longitude?.toDouble()
+        val rating = place.rating
+        val ratingCount = "(${place.ratingCount})"
+        val open = if (place.open.toBoolean())
             "<font color=\"${
-                mContext.resources.getColor(
+                holder.itemView.context.resources.getColor(
                     R.color.green_color,
-                    mContext.theme
+                    holder.itemView.context.theme
                 )
-            }\">${mContext.resources.getString(R.string.open_now)}</font>"
+            }\">${holder.itemView.context.resources.getString(R.string.open_now)}</font>"
         else
             "<font color=\"${
-                mContext.resources.getColor(
+                holder.itemView.context.resources.getColor(
                     R.color.navigationSelected,
-                    mContext.theme
+                    holder.itemView.context.theme
                 )
-            }\">${mContext.resources.getString(R.string.closed)}</font>"
+            }\">${holder.itemView.context.resources.getString(R.string.closed)}</font>"
 
-        val compatOpen = if (place?.get("open")
+        val compatOpen = if (place.open
                 .toBoolean()
-        ) mContext.resources.getString(R.string.open_now) else mContext.resources.getString(R.string.closed)
-        val close = if (!place?.get("close")
-                .isNullOrEmpty() && place?.get("close") != "null"
-        ) "${place?.get("close")}" else ""
+        ) holder.itemView.context.resources.getString(R.string.open_now) else holder.itemView.context.resources.getString(R.string.closed)
+        val close = if (!place.close
+                .isNullOrEmpty() && place.close != "null"
+        ) "${place.close}" else ""
 
         val timings = "$open $close"
         val compatTimings = "$compatOpen $close"
-        val phoneNumber = place?.get("phoneNumber")
+        val phoneNumber = place.phoneNumber
 
+        holder.ivSaveIcon.visibility = View.GONE
         holder.tvResultHeading.text = heading
         holder.tvAddress.text = address
         holder.rbRatings.rating = rating?.toFloat() ?: 4F
@@ -97,28 +92,8 @@ class PlacesAdapter(
             holder.tvTimings.text = compatTimings
         }
 
-        holder.ivSaveIcon.setOnClickListener {
-            itemClickListener?.invoke(
-                Location(
-                    id = place?.get("id").toString(),
-                    name = place?.get("name"),
-                    address = place?.get("address"),
-                    latitude = place?.get("latitude"),
-                    longitude = place?.get("longitude"),
-                    open = place?.get("open"),
-                    close = place?.get("close"),
-                    rating = place?.get("rating"),
-                    ratingCount = place?.get("ratingCount"),
-                    phoneNumber = place?.get("phoneNumber"),
-                    website = place?.get("website"),
-                    timeStamp = System.currentTimeMillis()
-                )
-            )
-            Toast.makeText(mContext, "Saved", Toast.LENGTH_SHORT).show()
-        }
-
         holder.ivSpeak.setOnClickListener {
-            (mContext as MainActivity).sayOutLoud("$heading")
+            (holder.itemView.context as MainActivity).sayOutLoud("$heading")
         }
 
         holder.ivShareIcon.setOnClickListener {
@@ -129,19 +104,15 @@ class PlacesAdapter(
                     Intent.EXTRA_TEXT,
                     "${heading}\n$address\nhttps://www.google.co.id/maps/@$latitude,$longitude"
                 )
-                mContext.startActivity(Intent.createChooser(it, "Share using:"))
+                holder.itemView.context.startActivity(Intent.createChooser(it, "Share using:"))
             }
-        }
-
-        holder.clSinglePlace.setOnClickListener {
-            (mContext as MainActivity).zoomToCurrentSelectedPlace(LatLng(latitude!!, longitude!!))
         }
 
         holder.ivCallIcon.setOnClickListener {
             if (!phoneNumber.isNullOrEmpty())
-                mContext.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber")))
+                holder.itemView.context.startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber")))
             else
-                Toast.makeText(mContext, "Phone number not Provided.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(holder.itemView.context, "Phone number not Provided.", Toast.LENGTH_SHORT).show()
         }
 
         holder.ivDirectionIcon.setOnClickListener {
@@ -150,21 +121,17 @@ class PlacesAdapter(
                 Uri.parse("google.navigation:q=$latitude,$longitude")
             ).also {
                 it.`package` = "com.google.android.apps.maps"
-                if (it.resolveActivity(mContext.packageManager) != null)
-                    mContext.startActivity(it)
+                if (it.resolveActivity(holder.itemView.context.packageManager) != null)
+                    holder.itemView.context.startActivity(it)
             }
         }
     }
 
     override fun getItemCount() = places.size
 
-    fun updateList(location: LatLng, position: Int) {
-        currentLocation = location
-        notifyItemInserted(position)
-    }
-
-    fun removeAll() {
+    fun updateList(locations: List<Location>) {
         places.clear()
+        places = locations as ArrayList
         notifyDataSetChanged()
     }
 }
