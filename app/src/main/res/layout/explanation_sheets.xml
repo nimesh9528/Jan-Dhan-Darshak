@@ -49,6 +49,7 @@
             <ImageView
                 android:id="@+id/ivNoDataIcon"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/icon_no_data"
                 android:src="@drawable/icon_no_data"/>
