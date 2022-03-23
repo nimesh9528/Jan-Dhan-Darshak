@@ -60,6 +60,7 @@ import jan.dhan.darshak.data.NearbyPointsApi
 import jan.dhan.darshak.ui.viewmodels.MainViewModel
 import jan.dhan.darshak.ui.fragments.ExplanationFragment
 import jan.dhan.darshak.ui.fragments.FormFragment
+import jan.dhan.darshak.ui.fragments.LanguageFragment
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -97,6 +98,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
     private lateinit var placesAdapter: PlacesAdapter
     private var textToSpeech: TextToSpeech? = null
     private val explanationFragment = ExplanationFragment()
+    private val languageFragment = LanguageFragment()
     private val formFragment = FormFragment()
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -635,7 +637,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, TextToSpeech.OnIni
         }
 
         slidingRootNavLayout.findViewById<TextView>(R.id.tvChangeLanguage)?.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Language Clicked", Toast.LENGTH_SHORT).show()
+            slidingRootNavBuilder.closeMenu(true)
+            languageFragment.show(supportFragmentManager, "change language")
         }
 
         slidingRootNavLayout.findViewById<ImageView>(R.id.ivCloseButton)?.setOnClickListener {
